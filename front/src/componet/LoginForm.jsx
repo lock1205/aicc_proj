@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import '../design/LoginForm.css';
+
 const { useState } = require('react');
 
 function LoginForm() {
@@ -20,30 +22,44 @@ function LoginForm() {
     console.log(result);
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email ID: </label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="wrapper">
+      <div className="left">
+        <h1>CUSTOMER LOGIN</h1>
+
+        <h2>아이코에서 나만의 AI 솔루션을 커스터마이징 하세요!</h2>
+
+        <form onSubmit={handleSubmit}>
+          <div className="id">
+            {/* <label>Email ID: </label> */}
+            <input
+              type="email"
+              placeholder="E-mail ID"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="pw">
+            {/* <label>Password:</label> */}
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="buttonBox">
+            <button className="loginButton" type="submit">
+              LOGIN
+            </button>
+          </div>
+        </form>
+
+        <div className="signup">
+          <div>아직 AICO 회원이 아니신가요?</div>
+          <Link to="/signup">회원가입</Link>
         </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">LOGIN</button>
-      </form>
-      <div>
-        <Link to="/signup">회원가입</Link>
       </div>
     </div>
   );
