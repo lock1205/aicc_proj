@@ -77,6 +77,10 @@
   margin-bottom: 10px;
 }
 
+.left .loginButton:hover {
+  background-color: #a669f5;
+}
+
 .left .signup{
   display: flex;
   justify-content: center;
