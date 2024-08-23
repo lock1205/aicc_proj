@@ -10,7 +10,6 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginForm />} />
         <Route path="/signup" element={<SignupForm />} />
-        {/* <Route path="/" element={<AgreeFinish />} /> */}
       </Routes>
     </BrowserRouter>
   );
