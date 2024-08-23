@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LoginForm from './componet/LoginForm';
+import SignupForm from './componet/SignupForm';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginForm />} />
+        <Route path="/signup" element={<SignupForm />} />
+        {/* <div className="LOGIN PAGE">
+          <img src="" alt="" />
+          <h1>CUSTOMER LOGIN</h1>
+          <h2>아이코에서 나만의 AI 솔루션을 커스터마이징 하세요</h2>
+        </div>
+        <div className="SignupForm">
+          <SignupForm />
+        </div> */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
