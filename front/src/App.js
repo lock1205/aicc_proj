@@ -9,6 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginForm />} />
         <Route path="/signup" element={<SignupForm />} />
+
         {/* <div className="LOGIN PAGE">
           <img src="" alt="" />
           <h1>CUSTOMER LOGIN</h1>
