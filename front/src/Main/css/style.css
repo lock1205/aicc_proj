@@ -1,6 +1,6 @@
 
 /***************** Header Style *******************/
-header .container {
+.header  {
   display: flex;
   justify-content: space-between;
   align-items: center;
