@@ -3,10 +3,17 @@ import { Link } from 'react-router-dom';
 import '../design/SignupForm.css';
 import '../design/bg.css';
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { openModal } from '../redux/slice/modalSlice';
 
 const SignupForm = () => {
   //const completeRegister = () => {};
-  const [email, setEmail] = useState('');
+  const { modalType, task } = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
+
+  const handleOpenModal = () => {
+    dispatch(openModal({ modalType: 'register', task: null }));
+  };
 
   const [formData, setFormData] = useState({
     id: '',
@@ -55,6 +62,9 @@ const SignupForm = () => {
       toast.error('연락처가 입력되지 않았습니다.');
       return;
     }
+    try {
+      handleOpenModal();
+    } catch (error) {}
   };
   return (
     <div className="bg">
@@ -142,11 +152,9 @@ const SignupForm = () => {
             </div>
 
             <div className="buttonBox">
-              <Link to={'/'}>
-                <button className="register " type="submit">
-                  등록완료
-                </button>
-              </Link>
+              <button className="register" type="submit">
+                등록완료
+              </button>
             </div>
           </form>
         </div>

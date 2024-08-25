@@ -11,19 +11,13 @@ import { ToastContainer } from 'react-toastify';
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/signup" element={<SignupForm />} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/signup" element={<SignupForm />} />
+      </Routes>
 
-        <ToastContainer
-          position="bottom-center"
-          autoClose={1000}
-          theme="light"
-        />
-      </div>
+      <ToastContainer position="bottom-center" autoClose={100} theme="light" />
     </BrowserRouter>
   );
 }
