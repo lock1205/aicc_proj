@@ -1,0 +1,84 @@
+.aml_container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.searchBar input {
+  flex: 1;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.searchBar button {
+  padding: 8px 16px;
+  margin-left: 8px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.searchBar button:hover {
+  background-color: #0056b3;
+}
+
+.filterBar {
+  margin-bottom: 20px;
+}
+
+.filterBar select {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.masterList{
+    margin-top: 20px;
+}
+
+.M-listItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.M-listItem span {
+  flex: 1;
+  text-align: center;
+}
+
+.M-listItem span:first-child {
+  text-align: left;
+}
+
+.M-listItem span:last-child {
+  text-align: right;
+}
+
+.M-listItem:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+.M-listNone {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+}
+
+
