@@ -55,8 +55,8 @@ function LoginForm() {
 
   return (
     <div className="bg">
-      <div className="wrapper">
-        <div className="left">
+      <div className="lg_wrapper">
+        <div className="lg_left">
           <h1>CUSTOMER LOGIN</h1>
 
           <h2>아이코에서 나만의 AI 솔루션을 커스터마이징 하세요!</h2>

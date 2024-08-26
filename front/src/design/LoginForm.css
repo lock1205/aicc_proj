@@ -1,4 +1,4 @@
-.wrapper{
+.lg_wrapper{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -6,7 +6,7 @@
 }
 
 
-.left{
+.lg_left{
   background-color: white;
   padding: 40px;
   border-radius: 17px;
@@ -15,7 +15,7 @@
   /* margin-right: 50px; */
 }
 
-.left h1{
+.lg_left h1{
   margin: 0;
   display: flex;
   justify-content: center;
@@ -23,7 +23,7 @@
     color: #7407FF;
 }
 
-.left h2{ 
+.lg_left h2{ 
   margin-top: 20px;
   display: flex;
   justify-content: center;
@@ -31,20 +31,20 @@
   color: #2c3e50;
 }
 
-.left form{  
+.lg_left form{  
   margin-top: 30px;
   display: flex;
   flex-direction: column;
 }
 
-.left .id,
+.lg_left .id,
 .pw {
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
 }
 
-.left .id input,
+.lg_left .id input,
 .pw input {
   display: flex;
   justify-content: center;
@@ -55,12 +55,12 @@
   font-size: 16px;
 }
 
-.left .buttonBox{
+.lg_left .buttonBox{
   display: flex;
   justify-content: center;
 }
 
-.left .loginButton{
+.lg_left .loginButton{
   width: 250px;
   padding: 10px;
   border-radius: 10px;
@@ -76,11 +76,11 @@
   
 }
 
-.left .loginButton:hover {
+.lg_left .loginButton:hover {
   background-color: #a669f5;
 }
 
-.left .signup{
+.lg_left .signup{
   display: flex;
   justify-content: center;
   margin-top: 20px;
@@ -88,11 +88,11 @@
  color: #060A1B;
 }
 
-.left .signup a{
+.lg_left .signup a{
   margin-left: 30px;
   color:#7407FF ;
 }
 
-.left .signup a:hover {
+.lg_left .signup a:hover {
 color: #FFDC4C;
 }

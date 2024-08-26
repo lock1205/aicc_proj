@@ -1,5 +1,5 @@
 /* src/components/Modal.css */
-.modalOverlay {
+.am_modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,13 +11,13 @@
   justify-content: center;
 }
 
-.window{
+.am_window{
   display: flex;
   justify-content: center;
-  max-width: 80%;
+  max-width: 100%;
 }
 
-.modalContent {
+.am_modalContent {
   background: white;
   opacity: 88%;
   padding: 20px;
@@ -28,7 +28,7 @@
   text-align: center;
 }
 
-.modalContent button {
+.am_modalContent button {
   margin-top: 20px;
   padding: 10px 20px;
   border: none;
@@ -38,6 +38,6 @@
   cursor: pointer;
 }
 
-.modalContent button:hover {
+.am_modalContent button:hover {
   background-color: #a669f5;
 }
