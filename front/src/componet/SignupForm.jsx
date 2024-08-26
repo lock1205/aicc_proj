@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../design/SignupForm.css';
 import '../design/bg.css';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../redux/slice/modalSlice';
+import { fetchPostItemData } from '../redux/slice/apiSlice';
 
 const SignupForm = () => {
+  //const navigate = useNavigate();
+  //navigate('/login'); javascript에서 페이지 라우팅 할 수 있음
   //const completeRegister = () => {};
   const { modalType, task } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
@@ -31,7 +34,7 @@ const SignupForm = () => {
     console.log(formData);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.id) {
       console.log('formData id');
@@ -64,7 +67,12 @@ const SignupForm = () => {
     }
     try {
       handleOpenModal();
-    } catch (error) {}
+      await dispatch(fetchPostItemData(formData)).unwrap();
+      toast.success('회원등록 완료');
+    } catch (error) {
+      console.error('Error adding task:', error);
+      toast.error('회원 등록 실패');
+    }
   };
   return (
     <div className="bg">
