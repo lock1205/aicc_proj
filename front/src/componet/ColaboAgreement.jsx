@@ -1,37 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../design/SignupForm.css';
-import '../design/bg.css';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { openModal } from '../redux/slice/modalSlice';
 import { fetchPostItemData } from '../redux/slice/apiSlice';
 
-import Modal from './Modal';
-
-const SignupForm = () => {
-  //const navigate = useNavigate();
-  //navigate('/login'); javascript에서 페이지 라우팅 할 수 있음
-  //const completeRegister = () => {};
-  const { isOpen, modalType, task } = useSelector((state) => state.modal);
-
-  //console.log(isOpen, modalType, task);
+const ColaboAgreement = () => {
+  const [formData, setFormData] = useState({
+    user_key: '',
+    company_name: '',
+    level: '',
+    email: '',
+    master_name: '',
+    master_tel: '',
+    end_date: '',
+    sum_money: '',
+    ai_data: '',
+    ai_media: '',
+    ai_lang: '',
+    ai_image: '',
+    title: '',
+    status: '',
+    description: '',
+  });
 
   const dispatch = useDispatch();
 
   const handleOpenModal = () => {
     dispatch(openModal({ modalType: 'register', task: null }));
   };
-
-  const [formData, setFormData] = useState({
-    id: '',
-    password: '',
-    name: '',
-    email: '',
-    company: '',
-    level: '',
-    phone: '',
-  });
 
   const handleChange = (e) => {
     //const { name, value } = e.target;
@@ -41,12 +38,12 @@ const SignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.id) {
+    if (!formData.title) {
       console.log('formData id');
       toast.error('ID가 입력되지 않았습니다.');
       return;
     }
-    if (!formData.password) {
+    if (!formData.company_name) {
       toast.error('password가 입력되지 않았습니다.');
       return;
     }
@@ -79,8 +76,9 @@ const SignupForm = () => {
       toast.error('회원 등록 실패');
     }
   };
+
   return (
-    <div className="bg">
+    <div>
       <div className="Signup-wrapper">
         <div className="content">
           <div className="Signup-title">회원 등록</div>
@@ -176,4 +174,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default ColaboAgreement;

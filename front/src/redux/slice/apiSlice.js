@@ -13,12 +13,12 @@ const postItemFetchThunk = (actionType, apiURL) => {
     return await postRequest(apiURL, options);
   });
 };
-
+//실제 데이터를 db에 넣을 수 있는 함수
 export const fetchPostItemData = postItemFetchThunk(
   'fetchPostItem',
   REGISTER_USER_API_URL
 );
-
+//create slice에서 사용하는 상태 체크
 const handleFullfilled = (stateKey) => (state, action) => {
   state[stateKey] = action.payload;
 };

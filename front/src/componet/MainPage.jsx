@@ -18,6 +18,9 @@ const MainPage = () => {
               <Link to={'/login'}>
                 <button> 로그인</button>
               </Link>
+              <Link to={'/colabo'}>
+                <button>협의서 작성</button>
+              </Link>
               <Link to={'/agreeFinsh'}>
                 <button> 협의서 작성 완료</button>
               </Link>
