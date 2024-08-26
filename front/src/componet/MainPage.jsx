@@ -21,6 +21,9 @@ const MainPage = () => {
               <Link to={'/agreeFinsh'}>
                 <button> 협의서 작성 완료</button>
               </Link>
+              <Link to={'/agreeMaterList'}>
+                <button> 괸라자 협의서 리스트</button>
+              </Link>
               <button>My Page</button>
             </ul>
           </div>
