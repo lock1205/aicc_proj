@@ -13,7 +13,7 @@ const List = ({ data }) => {
             <div key={index} className="M-listItem">
               {' '}
               {/* 데이터의 고유 인덱스를 key로 설정 */}
-              <span>{item.PROCESS}</span> {/* 진행 상태 표시 */}
+              <span>{item.STATUS}</span> {/* 진행 상태 표시 */}
               <span>{item.TITLE}</span> {/* 타이틀 표시 */}
               <span>{item.COMPANY_NAME}</span> {/* 회사 이름 표시 */}
               <span>{item.END_DATE}</span> {/* 마감 일자 표시 */}
