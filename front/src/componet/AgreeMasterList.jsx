@@ -13,7 +13,7 @@ const AgreeMasterList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('YOUR_BACKEND_API_URL');
+        const response = await fetch('YOUR_BACKEND_API_URL'); //backend 링크 바꿔야 함 이건 임시용
         const result = await response.json();
         setData(result);
         setFilteredData(result);
@@ -29,7 +29,7 @@ const AgreeMasterList = () => {
     let filteredList = data;
 
     if (filter !== '전체') {
-      filteredList = filteredList.filter((item) => item.PROCESS === filter);
+      filteredList = filteredList.filter((item) => item.STATUS === filter);
     }
 
     if (searchQuery) {
