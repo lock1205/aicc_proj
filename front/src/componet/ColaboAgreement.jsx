@@ -7,20 +7,18 @@ import { fetchPostItemData } from '../redux/slice/apiSlice';
 
 const ColaboAgreement = () => {
   const [formData, setFormData] = useState({
-    user_key: '',
+    user_key: '', //로그인된 회원의 로컬스토리지에서 가져온다.
     company_name: '',
     level: '',
     email: '',
     master_name: '',
     master_tel: '',
     end_date: '',
-    sum_money: '',
     ai_data: '',
     ai_media: '',
     ai_lang: '',
     ai_image: '',
     title: '',
-    status: '',
     description: '',
   });
 
@@ -39,23 +37,10 @@ const ColaboAgreement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.title) {
-      console.log('formData id');
-      toast.error('ID가 입력되지 않았습니다.');
+      toast.error('제목이 입력되지 않았습니다.');
       return;
     }
     if (!formData.company_name) {
-      toast.error('password가 입력되지 않았습니다.');
-      return;
-    }
-    if (!formData.name) {
-      toast.error('성함이 입력되지 않았습니다.');
-      return;
-    }
-    if (!formData.email) {
-      toast.error('Email이 입력되지 않았습니다.');
-      return;
-    }
-    if (!formData.company) {
       toast.error('회사명이 입력되지 않았습니다.');
       return;
     }
@@ -63,10 +48,27 @@ const ColaboAgreement = () => {
       toast.error('직책이 입력되지 않았습니다.');
       return;
     }
-    if (!formData.phone) {
+    if (!formData.email) {
+      toast.error('Email이 입력되지 않았습니다.');
+      return;
+    }
+    if (!formData.master_name) {
+      toast.error('총괄자명이 입력되지 않았습니다.');
+      return;
+    }
+    if (!formData.master_tel) {
       toast.error('연락처가 입력되지 않았습니다.');
       return;
     }
+    if (!formData.end_date) {
+      toast.error('희망마감기한이 입력되지 않았습니다.');
+      return;
+    }
+    if (!formData.description) {
+      toast.error('요구사항이 입력되지 않았습니다.');
+      return;
+    }
+
     try {
       handleOpenModal();
       await dispatch(fetchPostItemData(formData)).unwrap();
@@ -85,7 +87,7 @@ const ColaboAgreement = () => {
           <form className="" onSubmit={handleSubmit}>
             <div className="id ">
               <p>
-                ID
+                제목
                 {/*<h4 className="text-red-600">*필수 입력 사항*</h4> */}
               </p>
               <input
@@ -98,8 +100,20 @@ const ColaboAgreement = () => {
                 value={formData.id}
               ></input>
             </div>
+
+            <div className="phone">
+              <p>요구사항</p>
+              <textarea
+                className="bg-gray-300 text-gray-900"
+                name="phone"
+                id=""
+                onChange={handleChange}
+                value={formData.phone}
+              ></textarea>
+            </div>
+
             <div className="password">
-              <p>비밀번호</p>
+              <p>회사명</p>
               <input
                 className="bg-gray-300 text-gray-900"
                 type="password"
@@ -111,7 +125,7 @@ const ColaboAgreement = () => {
               ></input>
             </div>
             <div className="name">
-              <p>성함</p>
+              <p>직책</p>
               <input
                 className="bg-gray-300 text-gray-900"
                 name="name"
@@ -131,7 +145,7 @@ const ColaboAgreement = () => {
               ></input>
             </div>
             <div className="company">
-              <p>회사명</p>
+              <p>총괄자명</p>
               <input
                 className="bg-gray-300 text-gray-900"
                 name="company"
@@ -141,7 +155,7 @@ const ColaboAgreement = () => {
               ></input>
             </div>
             <div className="level">
-              <p>직책</p>
+              <p>연락처</p>
               <input
                 className="bg-gray-300 text-gray-900"
                 name="level"
@@ -151,7 +165,7 @@ const ColaboAgreement = () => {
               ></input>
             </div>
             <div className="phone">
-              <p>연락처</p>
+              <p>희망마감기한</p>
               <input
                 className="bg-gray-300 text-gray-900"
                 name="phone"
