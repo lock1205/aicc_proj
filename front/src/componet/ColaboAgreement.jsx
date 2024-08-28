@@ -4,23 +4,28 @@ import { toast } from 'react-toastify';
 
 import { openModal } from '../redux/slice/modalSlice';
 import { fetchPostItemData } from '../redux/slice/apiSlice';
+import { features } from '../ai_info/data';
+import { Link } from 'react-router-dom';
 
 const ColaboAgreement = () => {
   const [formData, setFormData] = useState({
     user_key: '', //로그인된 회원의 로컬스토리지에서 가져온다.
     company_name: '',
     level: '',
-    email: '',
     master_name: '',
     master_tel: '',
     end_date: '',
+    sum_money: '',
     ai_data: '',
     ai_media: '',
     ai_lang: '',
     ai_image: '',
     title: '',
     description: '',
+    status: '', //현재 협의서 상태를 리덕스 case문으로 넣는다
   });
+
+  const [isDropOpen, setIsDropOpen] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -48,34 +53,30 @@ const ColaboAgreement = () => {
       toast.error('직책이 입력되지 않았습니다.');
       return;
     }
-    if (!formData.email) {
-      toast.error('Email이 입력되지 않았습니다.');
-      return;
-    }
     if (!formData.master_name) {
       toast.error('총괄자명이 입력되지 않았습니다.');
       return;
     }
     if (!formData.master_tel) {
-      toast.error('연락처가 입력되지 않았습니다.');
+      toast.error('총괄자 연락처가 입력되지 않았습니다.');
       return;
     }
     if (!formData.end_date) {
       toast.error('희망마감기한이 입력되지 않았습니다.');
       return;
     }
-    if (!formData.description) {
-      toast.error('요구사항이 입력되지 않았습니다.');
+    if (!formData.sum_money) {
+      toast.error('예상예산이 입력되지 않았습니다.');
       return;
     }
 
     try {
       handleOpenModal();
       await dispatch(fetchPostItemData(formData)).unwrap();
-      toast.success('회원등록 완료');
+      toast.success('협의서 등록 완료');
     } catch (error) {
       console.error('Error adding task:', error);
-      toast.error('회원 등록 실패');
+      toast.error('협의서 등록 실패');
     }
   };
 
@@ -83,7 +84,7 @@ const ColaboAgreement = () => {
     <div>
       <div className="Signup-wrapper">
         <div className="content">
-          <div className="Signup-title">회원 등록</div>
+          <div className="Signup-title">협의서 입력</div>
           <form className="" onSubmit={handleSubmit}>
             <div className="id ">
               <p>
@@ -101,7 +102,7 @@ const ColaboAgreement = () => {
               ></input>
             </div>
 
-            <div className="phone">
+            <div className="decription">
               <p>요구사항</p>
               <textarea
                 className="bg-gray-300 text-gray-900"
@@ -112,7 +113,7 @@ const ColaboAgreement = () => {
               ></textarea>
             </div>
 
-            <div className="password">
+            <div className="company_name">
               <p>회사명</p>
               <input
                 className="bg-gray-300 text-gray-900"
@@ -124,7 +125,7 @@ const ColaboAgreement = () => {
                 value={formData.password}
               ></input>
             </div>
-            <div className="name">
+            <div className="level">
               <p>직책</p>
               <input
                 className="bg-gray-300 text-gray-900"
@@ -134,8 +135,8 @@ const ColaboAgreement = () => {
                 value={formData.name}
               ></input>
             </div>
-            <div className="email">
-              <p>Email</p>
+            <div className="master_name">
+              <p>총괄자명</p>
               <input
                 className="bg-gray-300 text-gray-900"
                 name="email"
@@ -144,8 +145,8 @@ const ColaboAgreement = () => {
                 value={formData.email}
               ></input>
             </div>
-            <div className="company">
-              <p>총괄자명</p>
+            <div className="master_tel">
+              <p>연락처</p>
               <input
                 className="bg-gray-300 text-gray-900"
                 name="company"
@@ -154,8 +155,8 @@ const ColaboAgreement = () => {
                 value={formData.company}
               ></input>
             </div>
-            <div className="level">
-              <p>연락처</p>
+            <div className="end_date">
+              <p>희망마감기한</p>
               <input
                 className="bg-gray-300 text-gray-900"
                 name="level"
@@ -164,8 +165,8 @@ const ColaboAgreement = () => {
                 value={formData.level}
               ></input>
             </div>
-            <div className="phone">
-              <p>희망마감기한</p>
+            <div className="sum_money">
+              <p>예상예산</p>
               <input
                 className="bg-gray-300 text-gray-900"
                 name="phone"
@@ -175,11 +176,58 @@ const ColaboAgreement = () => {
                 value={formData.phone}
               ></input>
             </div>
+            <div className="need_tech">
+              <div className="dropdown-box">
+                <p>AI데이터기술</p>
+                <label for="pet-select">기술 선택 : </label>
 
+                <select name="pets" id="pet-select">
+                  <option value="">--Please choose an option--</option>
+                  <option value="dog">Dog</option>
+                  <option value="cat">Cat</option>
+                  <option value="hamster">Hamster</option>
+                </select>
+              </div>
+              <div className="ai_media dropdown-box">
+                <p>AI미디어기술</p>
+                <input
+                  className="bg-gray-300 text-gray-900"
+                  name="phone"
+                  id=""
+                  onChange={handleChange}
+                  placeholder="'-'부호는 빼주세요"
+                  value={formData.phone}
+                ></input>
+              </div>
+              <div className="ai_image">
+                <p>AI이미지기술</p>
+                <input
+                  className="bg-gray-300 text-gray-900"
+                  name="phone"
+                  id=""
+                  onChange={handleChange}
+                  placeholder="'-'부호는 빼주세요"
+                  value={formData.phone}
+                ></input>
+              </div>
+              <div className="ai_lang">
+                <p>AI생성을 위한 프로그래밍 언어</p>
+                <input
+                  className="bg-gray-300 text-gray-900"
+                  name="phone"
+                  id=""
+                  onChange={handleChange}
+                  placeholder="'-'부호는 빼주세요"
+                  value={formData.phone}
+                ></input>
+              </div>
+            </div>
             <div className="buttonBox">
-              <button className="register" type="submit">
-                등록완료
-              </button>
+              <Link to={'/agreeFinsh'}>
+                <button className="register" type="submit">
+                  등록완료
+                </button>
+              </Link>
             </div>
           </form>
         </div>
