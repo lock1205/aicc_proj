@@ -1,22 +1,22 @@
 import React from 'react';
-
 import NavBar from './NavBar';
-import '../design/MainPage.css';
 import ContentsPage from './ContentsPage';
+import '../design/MainPage.css';
 
 const MainPage = () => {
   return (
-    <div>
-      <div class="MP_container">
-        <header>
-          <h1>회사로고</h1>
-          <div className="MP_nav">
-            <NavBar />
-          </div>
-        </header>
-        <div className="MP_main-content">
-          <ContentsPage />
-        </div>
+    <div className="Main-BG">
+      <div className="NavBar">
+        <NavBar />
+      </div>
+      <div className="Main-text">
+        <h1>
+          가장 신뢰 받는 인공 지능(AI) 솔루션으로 인간과 기업의 생산성을
+          높입니다.
+        </h1>
+      </div>
+      <div className="ContentsPage">
+        <ContentsPage />
       </div>
     </div>
   );
