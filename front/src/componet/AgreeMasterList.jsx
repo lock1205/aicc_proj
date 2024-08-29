@@ -44,10 +44,12 @@ const AgreeMasterList = () => {
   }, [searchQuery, filter, data]);
 
   return (
-    <div className="aml_container">
-      <SearchBar setSearchQuery={searchQuery} />
-      <FilterBar setFilter={filter} />
-      <List data={filteredData} />
+    <div className="bg">
+      <div className="aml_container">
+        <SearchBar setSearchQuery={searchQuery} />
+        <FilterBar setFilter={filter} />
+        <List data={filteredData} />
+      </div>
     </div>
   );
 };

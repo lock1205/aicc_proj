@@ -1,97 +1,80 @@
 .tech_container {
-    background-color: rgb(0, 0, 0, 0.5);
-    width: 80%;
-    min-height: 600px;
-    padding: 20px;
-    border-radius: 17px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    overflow-x: auto;
-    overflow-y: hidden;
+  background-color: white;
+  border-radius: 10px;
+  margin: 20px; /*임시 크기*/
+  height: 300px;   /*임시 크기*/
+  overflow-y: auto;
+  position: relative;
+  width: 80%; 
+}
+
+.tech_container::-webkit-scrollbar {
+  width: 15px;
+}
+
+.tech_container::-webkit-scrollbar-thumb {
+  background-color: rgba(116, 7, 255, 0.5);
+  border-radius: 10px;
+}
+
+.tech_container::-webkit-scrollbar-track {
+  background-color: #eee;
+  border-radius: 4px;
 }
 
 .tech_tabs {
   display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #706e6e;
+  justify-content: center;
+  margin-bottom: 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .tech_tab {
-  font-size: large;
-  color: #ffffff;
-  padding: 10px 20px;
+  flex-grow: 1;
+  padding: 15px 0;
+  border: none;
+  background-color: transparent;
+  color: #7407FF;
   cursor: pointer;
   font-weight: bold;
-  border: 0;
-  background-color:transparent;
-  border-radius: 20px 20px 0 0;
-  transition: all 0.1s ease-in-out;
+  margin-left: -4px;
 }
 
 .tech_tab.active {
-  color: #ffffff;
   background-color: #7407FF;
-
+  color: white;
 }
 
 .tech-row {
   display: flex;
   align-items: center;
-  justify-content: space-around;
   padding: 10px;
-  background-color: #ffffff;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  height: 10%;
+  border-bottom: 1px solid #eee;
 }
 
+.tech-logo {
+  margin-right: 10px;
+}
 
 .tech-description {
-  flex: 3;
-  min-width: 200px;
-  width: 200px;
-  padding: 10px;
-  text-align: left;
+  flex-grow: 1;
 }
 
 .tech-tags {
-  float: left;
-  padding: 10px;
   display: flex;
-  /* 태그가 넘치면 줄 바꿈 */
   flex-wrap: wrap;
-/* 태그들 간의 간격을 추가 */
-  gap: 5px;
-
+  justify-content: flex-end;
+  text-align: center;
 }
 
 .tech-tag {
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: 1px solid #7407FF;
+  margin-left: 5px;
   margin-right: 5px;
-  width: 120px;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-/* 화면 크기가 500px 이하일 때 적용되는 미디어 쿼리 */
-@media (max-width: 700px) {
-  .tech-tags {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    transition: all 0.3s ease-in-out;
-  }
-
-  .tech-tab {
-    font-size: medium;
-  }
-
-  .tech-tag {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 5px;
-  }
+  margin-bottom: 5px;
+  background-color: #eee;
+  padding: 2px 5px;
+  border-radius: 10px;
 }
