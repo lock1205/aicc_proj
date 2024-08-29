@@ -8,6 +8,8 @@ import { ToastContainer } from 'react-toastify';
 import AgreeFinish from './componet/AgreeFinish';
 import ColaboAgreement from './componet/ColaboAgreement';
 import AgreeMasterList from './componet/AgreeMasterList';
+import TechInfo from './componet/TechInfo';
+import Recommend from './componet/Recommend';
 
 function App() {
   return (
@@ -18,8 +20,9 @@ function App() {
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/agreeFinsh" element={<AgreeFinish />} />
         <Route path="/agreeMasterList" element={<AgreeMasterList />} />
-        {/* 나중에 메인페이지에서 빼야함 */}
         <Route path="/colabo" element={<ColaboAgreement />} />
+        <Route path="/techInfo" element={<TechInfo />} />
+        <Route path="/recommend" element={<Recommend />} />
       </Routes>
 
       <ToastContainer position="bottom-center" autoClose={100} theme="light" />

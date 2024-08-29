@@ -1,27 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MdHome } from 'react-icons/md';
+import '../design/MainPage.css';
+
 const NavBar = () => {
   return (
-    <nav>
-      <div>
-        <button>
-          <span className="text-sm">님 Logout</span>
-        </button>
-      </div>
-      <div>
-        <button>
-          <MdHome />
-        </button>
-      </div>
-      <div>
-        <Link to={'/agreeMasterList'}>
-          <button> 관리자 협의서 리스트</button>
+    <nav className="NAV">
+      <div className="left">
+        <Link to={'/techInfo'}>
+          <button className="main-tech">기술 소개</button>
+        </Link>
+        <Link to={'/recommend'}>
+          <button className="main-pack">패키지</button>
         </Link>
       </div>
-      <div className="w-4/5">
+      <button className="main-logo">
+        <i class="fi fi-brands-wepik"></i>
+        <span>AICO</span>
+      </button>
+      <div className="right">
+        <button className="Home">MY HOME</button>
         <Link to={'/login'}>
-          <button> 로그인</button>
+          <button>LOGIN</button>
+        </Link>
+        <Link className="main-agree" to={'/colabo'}>
+          <button>외뢰하기</button>
         </Link>
       </div>
     </nav>

@@ -1,62 +1,192 @@
+/* 전체 배경 */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
 
-
-header {
-    
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: #00d5c0;
-    position: fixed;
-    width: 100%;
-    top:0;
-    left: 0;
+.Main-BG,
+.ContentsPage {
+  width: 100%;
+  height: 100vh;
+  background-image: url('../img/purple-universe-bg.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 
-.MP_main-content{
-    flex: 1; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* 세로 가운데 정렬 */
-    align-items: center; /* 가로 가운데 정렬 */
-    text-align: center;
-    padding: 80px 20px 20px; 
+
+/* 스크롤 설정 */
+.Main-BG,
+.ContentsPage {
+  scroll-snap-align: start;
 }
 
-.MP_category{
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    
-    
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
-.MP_container{
-    background-color: #0d0f2d;
-    color: white;
-    text-align: center;
-    min-height: 100vh;      
+/* MP_contents*/
+.MP_category {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
 }
 
-.MP_contents{
-    background-color: black;
-    padding: 40px;
-    border: 2px solid #330966;
-    border-radius: 40px;
-    font-size: 18px;
-    width: 280px;
-    height: 60vh;
-    text-align: center;
-    margin-top: 30px;
-    cursor: pointer;
-    color: azure;
-
+.MP_contents {
+  width: 30%;
+  height: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  /* 블럭 처리 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  background-size: cover;
+  background-position: center;
 }
 
-.MP_nav{
-    background-color: black;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
+.MP_contents:hover {
+  background-color: transparent;
+  filter: brightness(100%);
+}
+
+/* MP_contents의 각 배경 이미지 */
+.MP_contents:nth-child(1) {
+  background-image: url('../img/button_bg1.jpg');
+}
+
+.MP_contents:nth-child(2) {
+  background-image: url('../img/button_bg2.jpg');
+}
+
+.MP_contents:nth-child(3) {
+  background-image: url('../img/button_bg3.jpg');
+}
+
+
+/* NavBar */
+/* NavBar */
+.NAV {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 10px;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: #5EFDDB;
+  position: fixed;
+  /* 스크롤 시 네비바 고정 */
+  top: 0;
+  width: calc(100% - 60px);
+  /* 네비바 전체 폭 조정 */
+  z-index: 1000;
+  /* 다른 콘텐츠보다 앞에 오도록 설정 */
+  transition: background-color 0.3s ease;
+  /* 배경색 전환 애니메이션 */
+}
+
+.NAV .left,
+.NAV .right {
+  display: flex;
+  align-items: center;
+}
+
+
+.NAV .left button,
+.NAV .right button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #060A1B;
+  cursor: pointer;
+  position: relative;
+}
+
+.NAV .left button {
+  margin-right: 20px;
+}
+
+.NAV .right button {
+  margin-left: 20px;
+}
+
+
+
+/* 클릭 시 하단 커서 효과 */
+.NAV .left button::after,
+.NAV .right button:not(.main-agree)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #7407FF;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.NAV .left button:hover::after,
+.NAV .right button:not(.main-agree):hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.NAV .right .main-agree button {
+  background-color: #060A1B;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 8px 15px;
+  transition: background-color 0.3s ease;
+}
+
+.NAV .right .main-agree button:hover {
+  background-color: #7407FF;
+}
+
+/* 중앙 로고 스타일 */
+.NAV .main-logo {
+  position: absolute;
+  background: none;
+  border: none;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  pointer-events: none;
+  /* 로고 클릭 불가 */
+}
+
+.NAV .main-logo i,
+.NAV .main-logo span {
+  pointer-events: auto;
+  /* 로고 내부 텍스트와 아이콘은 클릭 가능 */
+}
+
+.NAV .main-logo i {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
+.NAV .main-logo span {
+  font-size: 20px;
+  font-weight: bold;
+  color: #060A1B;
+}
+
+/* 네비바 스크롤 시 투명도 적용 */
+.NAV.scrolled {
+  background-color: rgba(94, 253, 219, 0.8);
+  /* 스크롤 시 투명도 적용 */
 }
