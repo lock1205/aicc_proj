@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import { openModal } from '../redux/slice/modalSlice';
-import { fetchPostItemData } from '../redux/slice/apiSlice';
+import { fetchPostTasksData } from '../redux/slice/apiSlice';
 import { features } from '../ai_info/data';
 import { Link } from 'react-router-dom';
 
 const ColaboAgreement = () => {
   const [formData, setFormData] = useState({
-    user_key: '', //로그인된 회원의 로컬스토리지에서 가져온다.
+    key: '2', //로그인된 회원의 로컬스토리지에서 가져온다.
     company_name: '',
     level: '',
     master_name: '',
@@ -22,7 +22,7 @@ const ColaboAgreement = () => {
     ai_image: '',
     title: '',
     description: '',
-    status: '', //현재 협의서 상태를 리덕스 case문으로 넣는다
+    status: 'new', //현재 협의서 상태를 리덕스 case문으로 넣는다
   });
 
   const [isDropOpen, setIsDropOpen] = useState(false);
@@ -35,9 +35,10 @@ const ColaboAgreement = () => {
 
   const handleChange = (e) => {
     //const { name, value } = e.target;
+
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    //console.log(formData);
   };
+  console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,8 +72,7 @@ const ColaboAgreement = () => {
     }
 
     try {
-      handleOpenModal();
-      await dispatch(fetchPostItemData(formData)).unwrap();
+      await dispatch(fetchPostTasksData(formData)).unwrap();
       toast.success('협의서 등록 완료');
     } catch (error) {
       console.error('Error adding task:', error);
@@ -94,22 +94,21 @@ const ColaboAgreement = () => {
               <input
                 className="bg-gray-300 text-gray-900"
                 type="text"
-                name="id"
+                name="title"
                 id=""
-                placeholder="신규 입력"
                 onChange={handleChange}
-                value={formData.id}
+                value={formData.title}
               ></input>
             </div>
 
             <div className="decription">
               <p>요구사항</p>
               <textarea
-                className="bg-gray-300 text-gray-900"
-                name="phone"
+                className="bg-gray-300 text-gray-900 w-full"
+                name="description"
                 id=""
                 onChange={handleChange}
-                value={formData.phone}
+                value={formData.description}
               ></textarea>
             </div>
 
@@ -117,46 +116,15 @@ const ColaboAgreement = () => {
               <p>회사명</p>
               <input
                 className="bg-gray-300 text-gray-900"
-                type="password"
-                name="password"
+                name="company_name"
                 id=""
                 placeholder="20자이내"
                 onChange={handleChange}
-                value={formData.password}
+                value={formData.company_name}
               ></input>
             </div>
             <div className="level">
               <p>직책</p>
-              <input
-                className="bg-gray-300 text-gray-900"
-                name="name"
-                id=""
-                onChange={handleChange}
-                value={formData.name}
-              ></input>
-            </div>
-            <div className="master_name">
-              <p>총괄자명</p>
-              <input
-                className="bg-gray-300 text-gray-900"
-                name="email"
-                id=""
-                onChange={handleChange}
-                value={formData.email}
-              ></input>
-            </div>
-            <div className="master_tel">
-              <p>연락처</p>
-              <input
-                className="bg-gray-300 text-gray-900"
-                name="company"
-                id=""
-                onChange={handleChange}
-                value={formData.company}
-              ></input>
-            </div>
-            <div className="end_date">
-              <p>희망마감기한</p>
               <input
                 className="bg-gray-300 text-gray-900"
                 name="level"
@@ -165,69 +133,100 @@ const ColaboAgreement = () => {
                 value={formData.level}
               ></input>
             </div>
+            <div className="master_name">
+              <p>총괄자명</p>
+              <input
+                className="bg-gray-300 text-gray-900"
+                name="master_name"
+                id=""
+                onChange={handleChange}
+                value={formData.master_name}
+              ></input>
+            </div>
+            <div className="master_tel">
+              <p>연락처</p>
+              <input
+                className="bg-gray-300 text-gray-900"
+                name="master_tel"
+                id=""
+                onChange={handleChange}
+                value={formData.master_tel}
+              ></input>
+            </div>
+            <div className="end_date">
+              <p>희망마감기한</p>
+              <input
+                className="bg-gray-300 text-gray-900"
+                name="end_date"
+                id=""
+                onChange={handleChange}
+                value={formData.end_date}
+              ></input>
+            </div>
             <div className="sum_money">
               <p>예상예산</p>
               <input
                 className="bg-gray-300 text-gray-900"
-                name="phone"
+                name="sum_money"
                 id=""
                 onChange={handleChange}
-                placeholder="'-'부호는 빼주세요"
-                value={formData.phone}
+                value={formData.sum_money}
               ></input>
             </div>
             <div className="need_tech">
-              <div className="dropdown-box">
+              <div className="ai_data">
                 <p>AI데이터기술</p>
-                <label for="pet-select">기술 선택 : </label>
-
-                <select name="pets" id="pet-select">
-                  <option value="">--Please choose an option--</option>
-                  <option value="dog">Dog</option>
-                  <option value="cat">Cat</option>
-                  <option value="hamster">Hamster</option>
+                <select name="ai_data" class="select" onChange={handleChange}>
+                  <option key={''}>선택하세요</option>
+                  {features.map(
+                    (option, idx) =>
+                      option.Major === 'AI_Data' && (
+                        <option key={idx}>{option.title}</option>
+                      )
+                  )}
                 </select>
               </div>
-              <div className="ai_media dropdown-box">
+              <div className="ai_media">
                 <p>AI미디어기술</p>
-                <input
-                  className="bg-gray-300 text-gray-900"
-                  name="phone"
-                  id=""
-                  onChange={handleChange}
-                  placeholder="'-'부호는 빼주세요"
-                  value={formData.phone}
-                ></input>
+                <select name="ai_media" class="select" onChange={handleChange}>
+                  <option key={''}>선택하세요</option>
+                  {features.map(
+                    (option, idx) =>
+                      option.Major === 'AI_Media' && (
+                        <option key={idx}>{option.title}</option>
+                      )
+                  )}
+                </select>
               </div>
               <div className="ai_image">
                 <p>AI이미지기술</p>
-                <input
-                  className="bg-gray-300 text-gray-900"
-                  name="phone"
-                  id=""
-                  onChange={handleChange}
-                  placeholder="'-'부호는 빼주세요"
-                  value={formData.phone}
-                ></input>
+                <select name="ai_image" class="select" onChange={handleChange}>
+                  <option key={''}>선택하세요</option>
+                  {features.map(
+                    (option, idx) =>
+                      option.Major === 'AI_Image' && (
+                        <option key={idx}>{option.title}</option>
+                      )
+                  )}
+                </select>
               </div>
               <div className="ai_lang">
                 <p>AI생성을 위한 프로그래밍 언어</p>
-                <input
-                  className="bg-gray-300 text-gray-900"
-                  name="phone"
-                  id=""
-                  onChange={handleChange}
-                  placeholder="'-'부호는 빼주세요"
-                  value={formData.phone}
-                ></input>
+                <select name="ai_lang" class="select" onChange={handleChange}>
+                  <option key={''}>선택하세요</option>
+                  {features.map(
+                    (option, idx) =>
+                      option.Major === 'AI_Image' && (
+                        <option key={idx}>{option.title}</option>
+                      )
+                  )}
+                </select>
               </div>
             </div>
             <div className="buttonBox">
-              <Link to={'/agreeFinsh'}>
-                <button className="register" type="submit">
-                  등록완료
-                </button>
-              </Link>
+              <button className="register" type="submit">
+                등록완료
+              </button>
             </div>
           </form>
         </div>

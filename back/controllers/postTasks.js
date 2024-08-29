@@ -14,7 +14,6 @@ exports.postTasks = async (req, res) => {
       req.body.ai_data,
       req.body.ai_media,
       req.body.ai_lang,
-
       req.body.ai_image,
       req.body.title,
       req.body.description,

@@ -25,7 +25,7 @@ const postTasksFetchThunk = (actionType, apiURL) => {
     const options = {
       body: JSON.stringify(postTasks), //표준 json 문자열로 변환
     };
-    return await getRequest(apiURL, options);
+    return await postRequest(apiURL, options);
   });
 };
 

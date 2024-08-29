@@ -6,7 +6,7 @@ const NavBar = () => {
     <nav>
       <div>
         <button>
-          <span className="text-sm">님 Logout</span>
+          <span>님 Logout</span>
         </button>
       </div>
       <div>
@@ -19,7 +19,7 @@ const NavBar = () => {
           <button> 관리자 협의서 리스트</button>
         </Link>
       </div>
-      <div className="w-4/5">
+      <div>
         <Link to={'/login'}>
           <button> 로그인</button>
         </Link>
