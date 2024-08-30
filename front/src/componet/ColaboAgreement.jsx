@@ -225,11 +225,11 @@ const ColaboAgreement = () => {
               </div>
             </div>
             <div className="buttonBox">
-              <AgreeFinish>
+              <Link to={'/agreeFinsh'}>
                 <button className="register" type="submit">
                   등록완료
                 </button>
-              </AgreeFinish>
+              </Link>
             </div>
           </form>
         </div>
