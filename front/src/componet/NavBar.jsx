@@ -24,7 +24,7 @@ const NavBar = () => {
           <button>LOGIN</button>
         </Link>
         <Link className="main-agree" to={'/colabo'}>
-          <button>외뢰하기</button>
+          <button>의뢰하기</button>
         </Link>
       </div>
     </nav>

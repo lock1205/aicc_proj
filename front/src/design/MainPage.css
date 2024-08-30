@@ -6,75 +6,224 @@ html {
   height: 100vh;
 }
 
-.Main-BG,
-.ContentsPage {
+.Main-BG {
   width: 100%;
-  height: 100vh;
   background-image: url('../img/purple-universe-bg.jpg');
   background-size: cover;
   background-position: center;
 }
 
-
-
-
 /* 스크롤 설정 */
-.Main-BG,
-.ContentsPage {
-  scroll-snap-align: start;
-
-}
-
 html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
 }
 
-/* MP_contents*/
-.MP_category {
+
+/* Main-text */
+.Main-text {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
-  height: 100%;
+  justify-content: center;
+  padding-top: 120px;
+
 }
 
-.MP_contents {
-  width: 30%;
-  height: 50%;
-  background-color: rgba(0, 0, 0, 0.6);
-  /* 블럭 처리 */
+.Main-text :nth-child(1) {
+  margin-top: 10px;
+  margin-bottom: -20px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  background-color: rgba(200, 109, 233, 0.5);
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+  width: 250px;
+  padding: 6PX;
+  border-radius: 15px;
+  font-family: "Gowun Batang", serif;
+}
+.Main-text :nth-child(2) 
+{
+  min-width: 600px;
+  text-align: center;
+  padding: 35px;
+  font-family: "New Amsterdam", sans-serif;
+  font-weight:700 ;
+  font-size: 100px;
+  text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+  background-image: linear-gradient(to top, #9795f0 0%, #fbc8d4 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+}
+
+.Main-text :nth-child(3) 
+{
+  min-width: 713px ;
+  font-size: 20px;
+  margin-top: -10px;
+  padding-left: 250px;
+  padding-right: 250px;
+  text-align: center;
+  font-family: "Gowun Batang", serif;
+  color: #ffffff;
+}
+
+/* ContentsPage */
+.MP_category {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  background-size: cover;
-  background-position: center;
+  height: 100vh;
 }
 
-.MP_contents:hover {
-  background-color: transparent;
+.MP_contents {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  height: 80%;
+}
+
+.MP_contents>div {
+  width: 32%;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+/* 이미지 어둡게 처리 1번째 이미지*/
+.MP_contents_tech::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../img/button_clip1.jpg') center center/cover no-repeat;
+  filter: brightness(50%);
+  transition: filter 0.3s ease;
+  z-index: 1;
+}
+
+/* 이미지 어둡게 처리 2번째 이미지*/
+.MP_contents_packge::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../img/button_clip2jpg.jpg') center center/cover no-repeat;
+  filter: brightness(50%);
+  transition: filter 0.3s ease;
+  z-index: 1;
+}
+
+/* 이미지 어둡게 처리 3번째 이미지*/
+.MP_contents_agree::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../img/button_clip3.jpg') center center/cover no-repeat;
+    filter: brightness(50%);
+    transition: filter 0.3s ease;
+    z-index: 1;
+}
+
+
+.MP_contents>div:hover::before {
   filter: brightness(100%);
 }
 
-/* MP_contents의 각 배경 이미지 */
-.MP_contents:nth-child(1) {
-  background-image: url('../img/button_bg1.jpg');
+/* 텍스트 컨테이너 스타일링 */
+.MP_contents>div>h1,
+.MP_contents>div>h3,
+.MP_contents>div>div {
+  position: relative;
+  z-index: 2;
 }
 
-.MP_contents:nth-child(2) {
-  background-image: url('../img/button_bg2.jpg');
+/* 영문 타이틀 스타일링 */
+.MP_contents h1 {
+  margin: 3;
+  padding: 10px;
+  font-size: 32px;
+  color: #911d6a;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.MP_contents:nth-child(3) {
-  background-image: url('../img/button_bg3.jpg');
+/* 설명 텍스트 스타일링 */
+.MP_contents h3 {
+  padding: 10px;
+  color: #cf45a1;
+  margin: 10px 0;
+  font-size: 20px;
+  position: absolute;
+  top: 1px;
 }
+
+
+
+
+/* 세부 설명 텍스트 스타일링 */
+.MP_contents div>div {
+  padding-left:12px ;
+  margin-left: 10px;margin-right: 10px;
+  text-align: left;
+  font-size: 16px;
+  color: #cf45a1;;
+  position: absolute;
+  bottom: 60px;
+}
+
+
+
+/* 버튼 스타일링 */
+.MP_contents button {
+  position: relative;
+  padding: 8px 30px;
+  z-index: 2;
+  bottom: -5px;
+  left: 10px;
+  font-size: 1rem;
+  font-family: "Gowun Batang", serif;
+  font-weight: 700;
+  background-color: rgb(145, 29, 106,0.5);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  opacity: 0; /* 기본 상태에서 숨김 */
+  transform: scale(1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* 콘텐츠에 커서가 닿았을 때 버튼 나타나기 */
+.MP_contents>div:hover button {
+  opacity: 1;
+}
+
+.MP_contents button:hover {
+  transform: scale(1.1);
+}
+
+
+
+
+
 
 
 /* NavBar */
-/* NavBar */
+.NavBar{
+display: flex;
+justify-content: center;
+}
+
 .NAV {
   display: flex;
   justify-content: space-between;
@@ -86,14 +235,9 @@ html {
   padding: 10px;
   background-color: #5EFDDB;
   position: fixed;
-  /* 스크롤 시 네비바 고정 */
   top: 0;
-  width: calc(100% - 60px);
-  /* 네비바 전체 폭 조정 */
+  width: 70%;
   z-index: 1000;
-  /* 다른 콘텐츠보다 앞에 오도록 설정 */
-  transition: background-color 0.3s ease;
-  /* 배경색 전환 애니메이션 */
 }
 
 .NAV .left,
@@ -125,7 +269,7 @@ html {
 
 /* 클릭 시 하단 커서 효과 */
 .NAV .left button::after,
-.NAV .right button:not(.main-agree)::after {
+.NAV .right :nth-child(-n+2)::after {
   content: '';
   position: absolute;
   left: 0;
@@ -139,7 +283,7 @@ html {
 }
 
 .NAV .left button:hover::after,
-.NAV .right button:not(.main-agree):hover::after {
+.NAV .right :nth-child(1):hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
