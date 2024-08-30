@@ -10,6 +10,7 @@ import { fetchPostItemData } from '../redux/slice/apiSlice';
 import Modal from './Modal';
 
 const SignupForm = () => {
+  const navigate = useNavigate();
   //const navigate = useNavigate();
   //navigate('/login'); javascript에서 페이지 라우팅 할 수 있음
   //const completeRegister = () => {};
@@ -74,6 +75,7 @@ const SignupForm = () => {
       handleOpenModal();
       await dispatch(fetchPostItemData(formData)).unwrap();
       toast.success('회원등록 완료');
+      navigate('/');
     } catch (error) {
       console.error('Error adding task:', error);
       toast.error('회원 등록 실패');

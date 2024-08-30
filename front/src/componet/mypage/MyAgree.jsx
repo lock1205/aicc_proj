@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const MyAgree = () => {
+  const [login, setlogin] = useState('');
+
   return (
     <div>
       <div></div>

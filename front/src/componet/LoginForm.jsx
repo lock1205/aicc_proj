@@ -3,14 +3,19 @@ import { useState } from 'react';
 import AlermModal from './AlermModal';
 import '../design/LoginForm.css';
 import '../design/bg.css';
+import { login, logout } from '../redux/slice/authSlice';
 
 function LoginForm() {
   // 로그인 컴포넌트
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [value, setValues] = useState({
+    email: '',
+    password: '',
+  });
+
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
+  console.log(value);
   //폼 제출 시 호출
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +26,7 @@ function LoginForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ value }),
       });
 
       if (!response.ok) {
@@ -67,8 +72,8 @@ function LoginForm() {
               <input
                 type="email"
                 placeholder="E-mail ID"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={value.email}
+                onChange={(e) => setValues({ ...value, email: e.target.value })}
                 required
               />
             </div>
@@ -77,8 +82,10 @@ function LoginForm() {
               <input
                 type="password"
                 placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={value.password}
+                onChange={(e) =>
+                  setValues({ ...value, password: e.target.value })
+                }
                 required
               />
             </div>

@@ -5,10 +5,11 @@ import { toast } from 'react-toastify';
 import { openModal } from '../redux/slice/modalSlice';
 import { fetchPostTasksData } from '../redux/slice/apiSlice';
 import { features } from '../ai_info/data';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AgreeFinish from './AgreeFinish';
 
 const ColaboAgreement = () => {
+  const navigator = useNavigate();
   const [formData, setFormData] = useState({
     key: '2', //로그인된 회원의 로컬스토리지에서 가져온다.
     company_name: '',
@@ -75,6 +76,7 @@ const ColaboAgreement = () => {
     try {
       await dispatch(fetchPostTasksData(formData)).unwrap();
       toast.success('협의서 등록 완료');
+      navigator('/agreeFinsh');
     } catch (error) {
       console.error('Error adding task:', error);
       toast.error('협의서 등록 실패');
@@ -225,11 +227,9 @@ const ColaboAgreement = () => {
               </div>
             </div>
             <div className="buttonBox">
-              <Link to={'/agreeFinsh'}>
-                <button className="register" type="submit">
-                  등록완료
-                </button>
-              </Link>
+              <button className="register" type="submit">
+                등록완료
+              </button>
             </div>
           </form>
         </div>
