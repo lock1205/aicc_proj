@@ -6,6 +6,7 @@ import { openModal } from '../redux/slice/modalSlice';
 import { fetchPostTasksData } from '../redux/slice/apiSlice';
 import { features } from '../ai_info/data';
 import { Link } from 'react-router-dom';
+import AgreeFinish from './AgreeFinish';
 
 const ColaboAgreement = () => {
   const [formData, setFormData] = useState({
@@ -224,9 +225,11 @@ const ColaboAgreement = () => {
               </div>
             </div>
             <div className="buttonBox">
-              <button className="register" type="submit">
-                등록완료
-              </button>
+              <AgreeFinish>
+                <button className="register" type="submit">
+                  등록완료
+                </button>
+              </AgreeFinish>
             </div>
           </form>
         </div>
