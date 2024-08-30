@@ -14,9 +14,12 @@ const NavBar = () => {
         </Link>
       </div>
       <button className="main-logo">
-        <i class="fi fi-brands-wepik"></i>
-        <span>AICO</span>
+        <Link to="/">
+          <i class="fi fi-brands-wepik"></i>
+          <span>AICO</span>
+        </Link>
       </button>
+
       <div className="right">
         <button className="Home">MY HOME</button>
 

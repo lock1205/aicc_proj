@@ -8,6 +8,7 @@ import { openModal } from '../redux/slice/modalSlice';
 import { fetchPostItemData } from '../redux/slice/apiSlice';
 
 import Modal from './Modal';
+import NavBar from './NavBar';
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -83,9 +84,10 @@ const SignupForm = () => {
   };
   return (
     <div className="bg">
+      <NavBar />
       <div className="Signup-wrapper">
         <div className="content">
-          <div className="Signup-title">회원 등록</div>
+          <div className="Signup-title">CREATE ACCOUNT</div>
           <form className="" onSubmit={handleSubmit}>
             <div className="id ">
               <p>

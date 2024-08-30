@@ -4,6 +4,7 @@ import AlermModal from './AlermModal';
 import '../design/LoginForm.css';
 import '../design/bg.css';
 import { login, logout } from '../redux/slice/authSlice';
+import NavBar from './NavBar';
 
 function LoginForm() {
   // 로그인 컴포넌트
@@ -60,12 +61,11 @@ function LoginForm() {
 
   return (
     <div className="bg">
+      <NavBar />
       <div className="lg_wrapper">
         <div className="lg_left">
           <h1>CUSTOMER LOGIN</h1>
-
           <h2>아이코에서 나만의 AI 솔루션을 커스터마이징 하세요!</h2>
-
           <form onSubmit={handleSubmit}>
             <div className="id">
               {/* <label>Email ID: </label> */}

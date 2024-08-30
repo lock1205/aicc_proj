@@ -7,6 +7,7 @@ import { fetchPostTasksData } from '../redux/slice/apiSlice';
 import { features } from '../ai_info/data';
 import { Link, useNavigate } from 'react-router-dom';
 import AgreeFinish from './AgreeFinish';
+import NavBar from './NavBar';
 
 const ColaboAgreement = () => {
   const navigator = useNavigate();
@@ -84,7 +85,8 @@ const ColaboAgreement = () => {
   };
 
   return (
-    <div>
+    <div className="bg">
+      <NavBar />
       <div className="Signup-wrapper">
         <div className="content">
           <div className="Signup-title">협의서 입력</div>

@@ -309,14 +309,14 @@ justify-content: center;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  cursor: pointer;
-  pointer-events: none;
-  /* 로고 클릭 불가 */
+  
 }
 
 .NAV .main-logo i,
 .NAV .main-logo span {
   pointer-events: auto;
+  cursor: pointer;
+  
   /* 로고 내부 텍스트와 아이콘은 클릭 가능 */
 }
 
