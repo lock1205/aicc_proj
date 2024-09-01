@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'; // 1. slice 생성
+import Cookies from 'js-cookie';
 
 const initialState = {
-  authData: JSON.parse(localStorage.getItem('authData')) || null,
+  authData: Cookies.get('authData')
+    ? JSON.parse(Cookies.get('authData'))
+    : null,
 };
 
 const authSlice = createSlice({
@@ -11,12 +14,14 @@ const authSlice = createSlice({
     login: (state, action) => {
       // update 상태값 변경
       state.authData = action.payload.authData;
-      localStorage.setItem('authData', JSON.stringify(action.payload.authData));
+      Cookies.set('authData', JSON.stringify(action.payload.authData), {
+        expires: 1,
+      });
     },
     logout: (state) => {
       // 상태값 비움
       state.authData = null;
-      localStorage.removeItem('authData');
+      Cookies.remove('authData');
     },
   },
 }); // slice 생성

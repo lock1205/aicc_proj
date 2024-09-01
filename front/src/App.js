@@ -10,6 +10,8 @@ import ColaboAgreement from './componet/ColaboAgreement';
 import AgreeMasterList from './componet/AgreeMasterList';
 import TechInfo from './componet/TechInfo';
 import Recommend from './componet/Recommend';
+import MyAgree from './componet/mypage/MyAgree';
+import DetailAgree from './componet/public/DetailAgree';
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
         <Route path="/colabo" element={<ColaboAgreement />} />
         <Route path="/techInfo" element={<TechInfo />} />
         <Route path="/recommend" element={<Recommend />} />
+        <Route path="/mypage" element={<MyAgree />} />
       </Routes>
 
       <ToastContainer position="bottom-center" autoClose={100} theme="light" />

@@ -1,0 +1,72 @@
+.Mp_container {
+    background-color: rgb(0, 0, 0,0.5);
+    width: 80%;
+      padding: 20px;
+      border-radius: 17px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+     
+}
+
+.Mp_item_wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.Mp_item_list {
+    /* display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    border-bottom: 1px solid #ebe3e3; */
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    gap: 2.5rem;
+  }
+  .Mp_item_list div {
+    flex: 1;
+
+  }
+  .Mp_item_list:hover{
+    background-color: #ad11eb;
+  }
+
+  
+/* 
+.Mp-listItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.Mp-listItem span {
+  flex: 1;
+  text-align: center;
+}
+
+.Mp-listItem span:first-child {
+  text-align: left;
+}
+
+.Mp-listItem span:last-child {
+  text-align: right;
+}
+
+.Mp-listItem:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+.Mp-listNone {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+} */
+  
+  
+  

@@ -1,57 +1,61 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import AlermModal from './AlermModal';
 import '../design/LoginForm.css';
 import '../design/bg.css';
 import { login, logout } from '../redux/slice/authSlice';
 import NavBar from './NavBar';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
+import { useDispatch } from 'react-redux';
 function LoginForm() {
   // 로그인 컴포넌트
-  const [value, setValues] = useState({
+  const [values, setValues] = useState({
     email: '',
     password: '',
   });
+  const dispatch = useDispatch();
+  const navigator = useNavigate();
+
+  //axios.defaults.withCredentials = true; //withCredentials 옵션은 단어 그대로, 다른 도메인(Cross Origin)에 요청을 보낼 때 요청에 인증(credential) 정보를 담아서 보낼 지를 결정하는 항목이다. 즉, 쿠키나 인증 헤더 정보를 포함시켜 요청하고 싶다면, 클라이언트에서 API 요청 메소드를 보낼때 withCredentials 옵션을 true로 설정해야한다.
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
-  console.log(value);
   //폼 제출 시 호출
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch('http://localhost:8080/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ value }),
-      });
-
-      if (!response.ok) {
+    axios
+      .post('http://localhost:8080/login_user', values)
+      .then((res) => {
+        if (res.status === 201) {
+          const decoded = jwtDecode(res.data.token);
+          dispatch(login({ authData: decoded }));
+          navigator('/');
+        } else {
+          setModalMessage('등록된 아이디 또는 비밀번호가 잘못되었습니다.');
+          setModalOpen(true);
+        }
+      })
+      .catch((error) => {
         setModalMessage(
-          '서버에서 오류가 발생했습니다. 나중에 다시 시도해 주세요.'
+          '서버에서 오류가 발생했습니다. 나중에 다시 시도해주세요'
         );
         setModalOpen(true);
+        console.log(error);
         return;
-      }
+      });
 
-      const result = await response.json();
-
-      if (result.success) {
-        alert('로그인 성공!');
-      } else {
-        setModalMessage('등록된 아이디 또는 비밀번호가 잘못되었습니다.');
-        setModalOpen(true);
-      }
-    } catch (error) {
-      setModalMessage(
-        '로그인 과정에서 오류가 발생했습니다. 다시 시도해 주세요.'
-      );
-      setModalOpen(true);
-    }
+    // const response = await fetch('http://localhost:8080/login', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ value }),
+    // });
   };
 
   // 모달을 닫는 함수
@@ -72,8 +76,10 @@ function LoginForm() {
               <input
                 type="email"
                 placeholder="E-mail ID"
-                value={value.email}
-                onChange={(e) => setValues({ ...value, email: e.target.value })}
+                value={values.email}
+                onChange={(e) =>
+                  setValues({ ...values, email: e.target.value })
+                }
                 required
               />
             </div>
@@ -82,9 +88,9 @@ function LoginForm() {
               <input
                 type="password"
                 placeholder="Password"
-                value={value.password}
+                value={values.password}
                 onChange={(e) =>
-                  setValues({ ...value, password: e.target.value })
+                  setValues({ ...values, password: e.target.value })
                 }
                 required
               />

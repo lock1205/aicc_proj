@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import { openModal } from '../redux/slice/modalSlice';
 import { fetchPostTasksData } from '../redux/slice/apiSlice';
 import { features } from '../ai_info/data';
 import { Link, useNavigate } from 'react-router-dom';
-import AgreeFinish from './AgreeFinish';
+
 import NavBar from './NavBar';
 
 const ColaboAgreement = () => {
   const navigator = useNavigate();
   const [formData, setFormData] = useState({
-    key: '2', //로그인된 회원의 로컬스토리지에서 가져온다.
+    key: '',
     company_name: '',
     level: '',
     master_name: '',
@@ -25,23 +24,18 @@ const ColaboAgreement = () => {
     ai_image: '',
     title: '',
     description: '',
-    status: 'new', //현재 협의서 상태를 리덕스 case문으로 넣는다
+    status: '신규', //현재 협의서 상태를 리덕스 case문으로 넣는다
   });
-
-  const [isDropOpen, setIsDropOpen] = useState(false);
 
   const dispatch = useDispatch();
 
-  const handleOpenModal = () => {
-    dispatch(openModal({ modalType: 'register', task: null }));
-  };
+  const authData = useSelector((state) => state.auth.authData);
 
   const handleChange = (e) => {
     //const { name, value } = e.target;
-
+    formData.key = authData.user_key;
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -76,7 +70,6 @@ const ColaboAgreement = () => {
 
     try {
       await dispatch(fetchPostTasksData(formData)).unwrap();
-      toast.success('협의서 등록 완료');
       navigator('/agreeFinsh');
     } catch (error) {
       console.error('Error adding task:', error);
@@ -97,7 +90,7 @@ const ColaboAgreement = () => {
                 {/*<h4 className="text-red-600">*필수 입력 사항*</h4> */}
               </p>
               <input
-                className="bg-gray-300 text-gray-900"
+                className=""
                 type="text"
                 name="title"
                 id=""
@@ -109,7 +102,7 @@ const ColaboAgreement = () => {
             <div className="decription">
               <p>요구사항</p>
               <textarea
-                className="bg-gray-300 text-gray-900 w-full"
+                className=""
                 name="description"
                 id=""
                 onChange={handleChange}
@@ -120,10 +113,9 @@ const ColaboAgreement = () => {
             <div className="company_name">
               <p>회사명</p>
               <input
-                className="bg-gray-300 text-gray-900"
+                className=""
                 name="company_name"
                 id=""
-                placeholder="20자이내"
                 onChange={handleChange}
                 value={formData.company_name}
               ></input>
@@ -131,7 +123,7 @@ const ColaboAgreement = () => {
             <div className="level">
               <p>직책</p>
               <input
-                className="bg-gray-300 text-gray-900"
+                className=""
                 name="level"
                 id=""
                 onChange={handleChange}
@@ -141,7 +133,7 @@ const ColaboAgreement = () => {
             <div className="master_name">
               <p>총괄자명</p>
               <input
-                className="bg-gray-300 text-gray-900"
+                className=""
                 name="master_name"
                 id=""
                 onChange={handleChange}
@@ -151,7 +143,7 @@ const ColaboAgreement = () => {
             <div className="master_tel">
               <p>연락처</p>
               <input
-                className="bg-gray-300 text-gray-900"
+                className=""
                 name="master_tel"
                 id=""
                 onChange={handleChange}
@@ -161,7 +153,7 @@ const ColaboAgreement = () => {
             <div className="end_date">
               <p>희망마감기한</p>
               <input
-                className="bg-gray-300 text-gray-900"
+                className=""
                 name="end_date"
                 id=""
                 onChange={handleChange}
@@ -171,7 +163,7 @@ const ColaboAgreement = () => {
             <div className="sum_money">
               <p>예상예산</p>
               <input
-                className="bg-gray-300 text-gray-900"
+                className=""
                 name="sum_money"
                 id=""
                 onChange={handleChange}
@@ -221,7 +213,7 @@ const ColaboAgreement = () => {
                   <option key={''}>선택하세요</option>
                   {features.map(
                     (option, idx) =>
-                      option.Major === 'AI_Image' && (
+                      option.Major === 'AI_Lang' && (
                         <option key={idx}>{option.title}</option>
                       )
                   )}

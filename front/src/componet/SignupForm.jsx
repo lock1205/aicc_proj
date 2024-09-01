@@ -15,7 +15,6 @@ const SignupForm = () => {
   //const navigate = useNavigate();
   //navigate('/login'); javascript에서 페이지 라우팅 할 수 있음
   //const completeRegister = () => {};
-  const { isOpen, modalType, task } = useSelector((state) => state.modal);
 
   //console.log(isOpen, modalType, task);
 
@@ -43,40 +42,40 @@ const SignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.id) {
-      console.log('formData id');
-      toast.error('ID가 입력되지 않았습니다.');
-      return;
-    }
-    if (!formData.password) {
-      toast.error('password가 입력되지 않았습니다.');
-      return;
-    }
-    if (!formData.name) {
-      toast.error('성함이 입력되지 않았습니다.');
-      return;
-    }
-    if (!formData.email) {
-      toast.error('Email이 입력되지 않았습니다.');
-      return;
-    }
-    if (!formData.company) {
-      toast.error('회사명이 입력되지 않았습니다.');
-      return;
-    }
-    if (!formData.level) {
-      toast.error('직책이 입력되지 않았습니다.');
-      return;
-    }
-    if (!formData.phone) {
-      toast.error('연락처가 입력되지 않았습니다.');
-      return;
-    }
+    // if (!formData.id) {
+    //   console.log('formData id');
+    //   toast.error('ID가 입력되지 않았습니다.');
+    //   return;
+    // }
+    // if (!formData.password) {
+    //   toast.error('password가 입력되지 않았습니다.');
+    //   return;
+    // }
+    // if (!formData.name) {
+    //   toast.error('성함이 입력되지 않았습니다.');
+    //   return;
+    // }
+    // if (!formData.email) {
+    //   toast.error('Email이 입력되지 않았습니다.');
+    //   return;
+    // }
+    // if (!formData.company) {
+    //   toast.error('회사명이 입력되지 않았습니다.');
+    //   return;
+    // }
+    // if (!formData.level) {
+    //   toast.error('직책이 입력되지 않았습니다.');
+    //   return;
+    // }
+    // if (!formData.phone) {
+    //   toast.error('연락처가 입력되지 않았습니다.');
+    //   return;
+    // }
     try {
       handleOpenModal();
       await dispatch(fetchPostItemData(formData)).unwrap();
       toast.success('회원등록 완료');
-      navigate('/');
+      navigate('/login');
     } catch (error) {
       console.error('Error adding task:', error);
       toast.error('회원 등록 실패');
@@ -90,10 +89,7 @@ const SignupForm = () => {
           <div className="Signup-title">CREATE ACCOUNT</div>
           <form className="" onSubmit={handleSubmit}>
             <div className="id ">
-              <p>
-                ID
-                {/*<h4 className="text-red-600">*필수 입력 사항*</h4> */}
-              </p>
+              <p>ID</p>
               <input
                 className="bg-gray-300 text-gray-900"
                 type="text"
@@ -102,6 +98,7 @@ const SignupForm = () => {
                 placeholder="신규 입력"
                 onChange={handleChange}
                 value={formData.id}
+                required //로그인화면과 맞춤 추가
               ></input>
             </div>
             <div className="password">
@@ -114,6 +111,7 @@ const SignupForm = () => {
                 placeholder="20자이내"
                 onChange={handleChange}
                 value={formData.password}
+                required //로그인화면과 맞춤 추가
               ></input>
             </div>
             <div className="name">
@@ -124,6 +122,7 @@ const SignupForm = () => {
                 id=""
                 onChange={handleChange}
                 value={formData.name}
+                required //로그인화면과 맞춤 추가
               ></input>
             </div>
             <div className="email">
@@ -131,9 +130,11 @@ const SignupForm = () => {
               <input
                 className="bg-gray-300 text-gray-900"
                 name="email"
+                type="email" //타입만 재지정
                 id=""
                 onChange={handleChange}
                 value={formData.email}
+                required //로그인화면과 맞춤 추가
               ></input>
             </div>
             <div className="company">
@@ -144,6 +145,7 @@ const SignupForm = () => {
                 id=""
                 onChange={handleChange}
                 value={formData.company}
+                required //로그인화면과 맞춤 추가
               ></input>
             </div>
             <div className="level">
@@ -154,6 +156,7 @@ const SignupForm = () => {
                 id=""
                 onChange={handleChange}
                 value={formData.level}
+                required //로그인화면과 맞춤 추가
               ></input>
             </div>
             <div className="phone">
@@ -165,6 +168,7 @@ const SignupForm = () => {
                 onChange={handleChange}
                 placeholder="'-'부호는 빼주세요"
                 value={formData.phone}
+                required //로그인화면과 맞춤 추가
               ></input>
             </div>
 

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../design/MainPage.css';
+import { useSelector } from 'react-redux';
 
 const ContentsPage = () => {
+  const authData = useSelector((state) => state.auth.authData);
   return (
     <div className="MP_category">
       <div className="MP_contents">
@@ -33,9 +35,16 @@ const ContentsPage = () => {
         <div className="MP_contents_agree">
           <h1>AGREEMENT</h1>
           <h3>협의서를 작성하여 견적 및 상담 받아보세요. </h3>
-          <Link className="agree-link" to={'/colabo'}>
-            <button>CHECK</button>
-          </Link>
+          {authData ? (
+            <Link className="agree-link" to={'/colabo'}>
+              <button>CHECK</button>
+            </Link>
+          ) : (
+            <Link className="agree-link" to={'/login'}>
+              <button>CHECK</button>
+            </Link>
+          )}
+
           <div>
             고효율 솔루션과 신뢰도 높은 파트너십을 갖춘 AICO와 협업으로,이전과는
             다른 인공지능 개발·운영을 경험하실 수 있습니다.

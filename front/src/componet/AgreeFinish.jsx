@@ -1,7 +1,10 @@
 import React from 'react';
 import '../design/agreeFinsh.css';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const AgreeFinish = () => {
+  const authData = useSelector((state) => state.auth.authData);
   return (
     <div className="bg">
       <div className="af_container">
@@ -19,7 +22,7 @@ const AgreeFinish = () => {
           </div>
           <h1>협의서 제출 완료</h1>
           <div className="text">
-            <div>홍길동님(아이디)의 협의서가</div>
+            <div>{authData.id}님의 협의서가</div>
             <div>성공적으로 제출되었습니다.</div>
           </div>
           <div className="af_bottom">
@@ -29,7 +32,9 @@ const AgreeFinish = () => {
               <span>에서 가능합니다.</span>
             </div>
             <p>
-              <button>마이페이지</button>
+              <Link to={'/mypage'}>
+                <button>마이페이지</button>
+              </Link>
             </p>
           </div>
         </div>

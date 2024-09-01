@@ -5,9 +5,10 @@ import {
   POST_TASKS_API_URL,
   GET_TASKS_API_URL,
   GET_USER_TASKS_API_URL,
+  UPDATE_USER_AGREE_API_URL,
 } from '../../util/apiUrl';
 
-import { postRequest, getRequest } from '../../util/requestMethods';
+import { postRequest, getRequest, putRequest } from '../../util/requestMethods';
 
 const postItemFetchThunk = (actionType, apiURL) => {
   return createAsyncThunk(actionType, async (postData) => {
@@ -49,6 +50,16 @@ const getUserItemFetchThunk = (actionType, apiURL) => {
   });
 };
 
+const updateItemFetchThunk = (actionType, apiURL) => {
+  return createAsyncThunk(actionType, async (updateData) => {
+    console.log(updateData);
+    const options = {
+      body: JSON.stringify(updateData), // 표준 json 문자열로 변환
+    };
+    return await putRequest(apiURL, options);
+  });
+};
+
 //유저 실제 데이터를 db에 넣을 수 있는 함수
 export const fetchPostItemData = postItemFetchThunk(
   'fetchPostItem',
@@ -72,6 +83,11 @@ export const fetchGetUserTasksData = getUserItemFetchThunk(
   'fetchGetUserTasks',
   GET_USER_TASKS_API_URL
 );
+//Mypage에서 유저 협의서 리스트 update
+export const fetchUpdateAgreeTasksData = updateItemFetchThunk(
+  'fetchUpdateAgreeTasks',
+  UPDATE_USER_AGREE_API_URL
+);
 
 //create slice에서 사용하는 상태 체크
 const handleFullfilled = (stateKey) => (state, action) => {
@@ -89,6 +105,7 @@ const apiSlice = createSlice({
     fetchPostTasks: null,
     fetchGetTasks: null,
     fetchGetUserTasks: null,
+    fetchUpdateAgreeTasks: null,
   },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
@@ -104,7 +121,12 @@ const apiSlice = createSlice({
         fetchGetUserTasksData.fulfilled,
         handleFullfilled('fetchGetUserTasks')
       )
-      .addCase(fetchGetUserTasksData.rejected, handleRejected);
+      .addCase(fetchGetUserTasksData.rejected, handleRejected)
+      .addCase(
+        fetchUpdateAgreeTasksData.fulfilled,
+        handleFullfilled('fetchUpdateAgreeTasks')
+      )
+      .addCase(fetchUpdateAgreeTasksData.rejected, handleRejected);
   },
 });
 

@@ -48,7 +48,8 @@
 }
 
 .masterList{
-    margin-top: 20px;
+    margin-top: 10px;
+    width: 600px;
 }
 
 .M-listItem {
@@ -81,4 +82,7 @@
   color: #888;
 }
 
+.M-listItem:hover {
+  background-color: #ad11eb;
+}
 
