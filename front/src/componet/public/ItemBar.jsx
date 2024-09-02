@@ -44,17 +44,14 @@ const ItemBar = ({ task }) => {
   };
 
   return (
-    <div className="Mp_item">
-      <div className="Mp_item_wrapper">
-        <div className="Mp_item_list" onClick={handleOpenModal}>
-          <span>{arg_num}</span>
-          <span>{status}</span>
-          <span>{textLengthOverCut(title, 7, '...')}</span>
-          <span>{textLengthOverCut(description, 7, '...')}</span>
-          <span>{company_name}</span>
-          <span>{end_date}</span>
-          <span>{master_tel}</span>
-        </div>
+    <div className="masterList">
+      <div className="M-listItem" onClick={handleOpenModal}>
+        {/* <span>{arg_num}</span> */}
+        <span>{status}</span>
+        <span>{textLengthOverCut(title, 19, '...')}</span>
+        <span>{company_name}</span>
+        <span>{end_date}</span>
+        {/* <span>{master_tel}</span> */}
       </div>
     </div>
   );
