@@ -60,25 +60,27 @@
   background-color: #a669f5;
 }
 
-input,
-textarea,
-select {
+.Agree-content input,
+.Agree-content textarea,
+.Agree-content select {
   width: 100%;
   padding: 8px;
   margin: 4px 0;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background-color: rgba(116, 7, 255, 0.1);
+  /* color: white; */
 }
 
-textarea{
+.Agree-content textarea{
   height: 6.25em;
   resize: none;
 }
 
-input::placeholder,
-textarea::placeholder {
-  color: #cccccc;
+.Agree-content input::placeholder,
+.Agree-content textarea::placeholder {
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .Agree-submit_tip{

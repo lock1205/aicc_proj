@@ -185,7 +185,7 @@ const ColaboAgreement = () => {
                   id=""
                   onChange={handleChange}
                   value={formData.end_date}
-                  placeholder="2024-09-02"
+                  placeholder="2000-09-02"
                 ></input>
               </div>
               <div className="Agree-sum_money">
