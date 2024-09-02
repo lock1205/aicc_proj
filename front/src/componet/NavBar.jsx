@@ -23,6 +23,10 @@ const NavBar = () => {
         <Link to={'/recommend'}>
           <button className="main-pack">패키지</button>
         </Link>
+
+        <Link to={'/agreeMasterList'}>
+          <button className="Home">관리자페이지</button>
+        </Link>
       </div>
       <button className="main-logo">
         <Link to="/">
@@ -32,11 +36,7 @@ const NavBar = () => {
       </button>
 
       <div className="right">
-        {authData?.email === 'admin@admin' ? (
-          <Link to={'/agreeMasterList'}>
-            <button className="Home">관리자페이지</button>
-          </Link>
-        ) : authData ? (
+        {authData ? (
           <Link to={'/mypage'}>
             <button className="Home">MY HOME</button>
           </Link>
