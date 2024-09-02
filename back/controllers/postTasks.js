@@ -30,3 +30,20 @@ exports.postTasks = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+
+exports.postStatusTasks = async (req, res) => {
+  const value = req.body.status;
+  try {
+    if (value != '전체') {
+      allTasks = await database.query(
+        'SELECT * FROM agreement where status = $1',
+        [value]
+      ); // agreement테이블에서 모든 행을 선택
+    } else {
+      allTasks = await database.query('SELECT * FROM agreement ');
+    }
+    return res.status(201).json(allTasks.rows);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};

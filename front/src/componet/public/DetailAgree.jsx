@@ -64,10 +64,6 @@ const DetailAgree = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.status === '제안') {
-      formData.status = '재협의';
-    }
-
     try {
       await dispatch(fetchUpdateAgreeTasksData(formData)).unwrap();
       toast.success('협의서가 수정되었습니다.');

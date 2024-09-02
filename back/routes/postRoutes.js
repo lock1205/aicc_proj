@@ -1,7 +1,6 @@
 const router = require('express').Router();
-const { postTasks } = require('../controllers/postTasks');
+const { postTasks, postStatusTasks } = require('../controllers/postTasks');
 const { postUser, loginUser } = require('../controllers/postUser');
-const { updateMyAgreeTask } = require('../controllers/updateTasks');
 
 // const { postTasks } = require('../controllers/postTask');
 // const { postUser, loginUser } = require('../controllers/postUser');
@@ -14,5 +13,6 @@ const { updateMyAgreeTask } = require('../controllers/updateTasks');
 router.post('/register_user', postUser);
 router.post('/post_tasks', postTasks);
 router.post('/login_user', loginUser);
+router.post('/post_status', postStatusTasks);
 
 module.exports = router;
