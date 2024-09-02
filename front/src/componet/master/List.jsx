@@ -50,7 +50,7 @@ const List = ({ task }) => {
       <div className="M-listItem" onClick={handleOpenModal}>
         {/* 데이터의 고유 인덱스를 key로 설정 */}
         <span>{status}</span> {/* 진행 상태 표시 */}
-        <span>{textLengthOverCut(title, 7, '...')}</span> {/* 타이틀 표시 */}
+        <span>{textLengthOverCut(title, 19, '...')}</span> {/* 타이틀 표시 */}
         <span>{textLengthOverCut(company_name, 7, '...')}</span>{' '}
         {/* 회사 이름 표시 */}
         <span>{end_date}</span> {/* 마감 일자 표시 */}
