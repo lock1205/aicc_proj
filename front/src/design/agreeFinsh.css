@@ -1,4 +1,94 @@
+/* 협의서 작성 페이지 */
+.Agree-wrapper{
+  margin-top: 160px;
+  width:70%;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
 
+.Agree-content {
+  width: 50%;
+  text-align: left;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.Agree-title {
+  margin-bottom: 20px;
+}
+
+.Agree-base h3,
+.Agree-myInfo h3,
+.Agree-hope h3,
+.Agree-need_tech h3 {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  color: #7407FF;
+}
+
+.Agree-id p > span,
+.Agree-company_name p >span, .Agree-level p>span, .Agree-master_name p>span,.Agree-master_tel p>span, .Agree-end_date p>span, .Agree-sum_money p>span  {
+  font-size: small;
+  color: red;
+}
+
+.Agree-buttonBox {
+  text-align: center;
+}
+
+.Agree-register {
+  padding: 10px 20px;
+  margin-top: 80px;
+  margin-bottom: 35px;
+  width: 100%;
+  background-color: #7407FF;
+  box-shadow: 5px 5px 0 rgba(116, 7, 255, 0.5);
+  color: white;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.Agree-register:hover {
+  background-color: #a669f5;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 8px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+textarea{
+  height: 6.25em;
+  resize: none;
+}
+
+.Agree-submit_tip{
+  font-size: small;
+  color: #ccc;
+}
+
+.Agree-submit_tip p{
+  margin-top: 0;
+}
+
+
+
+
+/* 협의서 작성 완료시 나오는 페이지 */
 .af_container{
     background-color: rgb(0, 0, 0,0.5);
     width: 80%;

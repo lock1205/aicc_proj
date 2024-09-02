@@ -10,6 +10,7 @@ import NavBar from './NavBar';
 
 const ColaboAgreement = () => {
   const navigator = useNavigate();
+
   const [formData, setFormData] = useState({
     key: '',
     company_name: '',
@@ -80,98 +81,125 @@ const ColaboAgreement = () => {
   return (
     <div className="bg">
       <NavBar />
-      <div className="Signup-wrapper">
-        <div className="content">
-          <div className="Signup-title">협의서 입력</div>
+      <div className="Agree-wrapper">
+        <div className="Agree-content">
+          <div className="Agree-title">
+            <h1>협의서 작성하기</h1>
+            <h2>[AICO]나만의 AI솔루션 제작 요청</h2>
+          </div>
           <form className="" onSubmit={handleSubmit}>
-            <div className="id ">
-              <p>
-                제목
-                {/*<h4 className="text-red-600">*필수 입력 사항*</h4> */}
-              </p>
-              <input
-                className=""
-                type="text"
-                name="title"
-                id=""
-                onChange={handleChange}
-                value={formData.title}
-              ></input>
-            </div>
+            <div className="Agree-base">
+              <h3>협의서 개요</h3>
+              <div className="Agree-id ">
+                <p>
+                  제목 <span>(필수)</span>
+                  {/*<h4 className="text-red-600">*필수 입력 사항*</h4> */}
+                </p>
 
-            <div className="decription">
-              <p>요구사항</p>
-              <textarea
-                className=""
-                name="description"
-                id=""
-                onChange={handleChange}
-                value={formData.description}
-              ></textarea>
-            </div>
+                <input
+                  className=""
+                  type="text"
+                  name="title"
+                  id=""
+                  onChange={handleChange}
+                  value={formData.title}
+                ></input>
+              </div>
+              <div className="Agree-decription">
+                <p>요구사항</p>
+                <textarea
+                  className=""
+                  name="description"
+                  id=""
+                  onChange={handleChange}
+                  value={formData.description}
+                ></textarea>
+              </div>
+              <div className="Agree-myInfo">
+                <h3>기본 정보</h3>
 
-            <div className="company_name">
-              <p>회사명</p>
-              <input
-                className=""
-                name="company_name"
-                id=""
-                onChange={handleChange}
-                value={formData.company_name}
-              ></input>
+                <div className="Agree-company_name">
+                  <p>
+                    회사명 <span>(필수)</span>
+                  </p>
+                  <input
+                    className=""
+                    name="company_name"
+                    id=""
+                    onChange={handleChange}
+                    value={formData.company_name}
+                  ></input>
+                </div>
+                <div className="Agree-level">
+                  <p>
+                    직책<span>(필수)</span>
+                  </p>
+                  <input
+                    className=""
+                    name="level"
+                    id=""
+                    onChange={handleChange}
+                    value={formData.level}
+                  ></input>
+                </div>
+                <div className="Agree-master_name">
+                  <p>
+                    총괄자명<span>(필수)</span>
+                  </p>
+                  <input
+                    className=""
+                    name="master_name"
+                    id=""
+                    onChange={handleChange}
+                    value={formData.master_name}
+                  ></input>
+                </div>
+                <div className="Agree-master_tel">
+                  <p>
+                    연락처<span>(필수)</span>
+                  </p>
+                  <input
+                    className=""
+                    name="master_tel"
+                    id=""
+                    onChange={handleChange}
+                    value={formData.master_tel}
+                    placeholder="01012345678"
+                  ></input>
+                </div>
+              </div>
             </div>
-            <div className="level">
-              <p>직책</p>
-              <input
-                className=""
-                name="level"
-                id=""
-                onChange={handleChange}
-                value={formData.level}
-              ></input>
+            <div className="Agree-hope">
+              <h3>사전 요구 사항</h3>
+
+              <div className="Agree-end_date">
+                <p>
+                  희망마감기한<span>(필수)</span>
+                </p>
+                <input
+                  className=""
+                  name="end_date"
+                  id=""
+                  onChange={handleChange}
+                  value={formData.end_date}
+                ></input>
+              </div>
+              <div className="Agree-sum_money">
+                <p>
+                  예상예산<span>(필수)</span>
+                </p>
+                <input
+                  className=""
+                  name="sum_money"
+                  id=""
+                  onChange={handleChange}
+                  value={formData.sum_money}
+                ></input>
+              </div>
             </div>
-            <div className="master_name">
-              <p>총괄자명</p>
-              <input
-                className=""
-                name="master_name"
-                id=""
-                onChange={handleChange}
-                value={formData.master_name}
-              ></input>
-            </div>
-            <div className="master_tel">
-              <p>연락처</p>
-              <input
-                className=""
-                name="master_tel"
-                id=""
-                onChange={handleChange}
-                value={formData.master_tel}
-              ></input>
-            </div>
-            <div className="end_date">
-              <p>희망마감기한</p>
-              <input
-                className=""
-                name="end_date"
-                id=""
-                onChange={handleChange}
-                value={formData.end_date}
-              ></input>
-            </div>
-            <div className="sum_money">
-              <p>예상예산</p>
-              <input
-                className=""
-                name="sum_money"
-                id=""
-                onChange={handleChange}
-                value={formData.sum_money}
-              ></input>
-            </div>
-            <div className="need_tech">
-              <div className="ai_data">
+            <div className="Agree-need_tech">
+              <h3>희망 기술</h3>
+              <div className="Agree-ai_data">
                 <p>AI데이터기술</p>
                 <select name="ai_data" class="select" onChange={handleChange}>
                   <option key={''}>선택하세요</option>
@@ -183,7 +211,7 @@ const ColaboAgreement = () => {
                   )}
                 </select>
               </div>
-              <div className="ai_media">
+              <div className="Agree-ai_media">
                 <p>AI미디어기술</p>
                 <select name="ai_media" class="select" onChange={handleChange}>
                   <option key={''}>선택하세요</option>
@@ -195,7 +223,7 @@ const ColaboAgreement = () => {
                   )}
                 </select>
               </div>
-              <div className="ai_image">
+              <div className="Agree-ai_image">
                 <p>AI이미지기술</p>
                 <select name="ai_image" class="select" onChange={handleChange}>
                   <option key={''}>선택하세요</option>
@@ -207,7 +235,7 @@ const ColaboAgreement = () => {
                   )}
                 </select>
               </div>
-              <div className="ai_lang">
+              <div className="Agree-ai_lang">
                 <p>AI생성을 위한 프로그래밍 언어</p>
                 <select name="ai_lang" class="select" onChange={handleChange}>
                   <option key={''}>선택하세요</option>
@@ -220,10 +248,16 @@ const ColaboAgreement = () => {
                 </select>
               </div>
             </div>
-            <div className="buttonBox">
-              <button className="register" type="submit">
-                등록완료
+            <div className="Agree-buttonBox">
+              <button className="Agree-register" type="submit">
+                제출하기
               </button>
+              <div className="Agree-submit_tip">
+                제출 과정에서 문제가 발생하였다면 1577-2020으로 문의주세요!
+                <p>
+                  협의서 관리 솔루션 그리팅(Greeting)의 고객센터로 연결됩니다.
+                </p>
+              </div>
             </div>
           </form>
         </div>
