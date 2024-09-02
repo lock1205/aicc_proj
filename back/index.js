@@ -25,6 +25,7 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
+app.use(require('./routes/deleteRoutes'));
 app.use(require('./routes/postRoutes'));
 app.use(require('./routes/getRoutes'));
 app.use(require('./routes/updateRoutes'));

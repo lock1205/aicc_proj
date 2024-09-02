@@ -6,9 +6,18 @@ import {
   GET_TASKS_API_URL,
   GET_USER_TASKS_API_URL,
   UPDATE_USER_AGREE_API_URL,
+  UPDADTE_AGREE_STATUS_API_URL,
+  UPDADTE_AGREE_STATUS_COMMENT_API_URL,
+  DELETE_TASKS_API_URL,
+  POST_STATUS_TASKS_API_URL,
 } from '../../util/apiUrl';
 
-import { postRequest, getRequest, putRequest } from '../../util/requestMethods';
+import {
+  postRequest,
+  getRequest,
+  putRequest,
+  deleteRequest,
+} from '../../util/requestMethods';
 
 const postItemFetchThunk = (actionType, apiURL) => {
   return createAsyncThunk(actionType, async (postData) => {
@@ -60,6 +69,16 @@ const updateItemFetchThunk = (actionType, apiURL) => {
   });
 };
 
+const deleteItemFetchThunk = (actionType, apiURL) => {
+  return createAsyncThunk(actionType, async (arg_num) => {
+    const options = {
+      method: 'DELETE',
+    };
+    const fullPath = `${apiURL}/${arg_num}`;
+    return await deleteRequest(fullPath, options);
+  });
+};
+
 //유저 실제 데이터를 db에 넣을 수 있는 함수
 export const fetchPostItemData = postItemFetchThunk(
   'fetchPostItem',
@@ -88,6 +107,24 @@ export const fetchUpdateAgreeTasksData = updateItemFetchThunk(
   'fetchUpdateAgreeTasks',
   UPDATE_USER_AGREE_API_URL
 );
+export const fetchUpdateStatusTasksData = updateItemFetchThunk(
+  'fetchUpdateStatusTasks',
+  UPDADTE_AGREE_STATUS_API_URL
+);
+export const fetchUpdateStatusCommentTasksData = updateItemFetchThunk(
+  'fetchUpdateStatusCommentTasks',
+  UPDADTE_AGREE_STATUS_COMMENT_API_URL
+);
+
+export const fetchDeleteItemData = deleteItemFetchThunk(
+  'fetchDeleteItem',
+  DELETE_TASKS_API_URL
+);
+
+export const fetchStatusTasksData = postTasksFetchThunk(
+  'fetchPostStatusTasks',
+  POST_STATUS_TASKS_API_URL
+);
 
 //create slice에서 사용하는 상태 체크
 const handleFullfilled = (stateKey) => (state, action) => {
@@ -106,6 +143,10 @@ const apiSlice = createSlice({
     fetchGetTasks: null,
     fetchGetUserTasks: null,
     fetchUpdateAgreeTasks: null,
+    fetchUpdateStatusTasks: null,
+    fetchUpdateStatusCommentTasks: null,
+    fetchDeleteItem: null,
+    fetchPostStatusTasks: null,
   },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
@@ -126,7 +167,31 @@ const apiSlice = createSlice({
         fetchUpdateAgreeTasksData.fulfilled,
         handleFullfilled('fetchUpdateAgreeTasks')
       )
-      .addCase(fetchUpdateAgreeTasksData.rejected, handleRejected);
+      .addCase(fetchUpdateAgreeTasksData.rejected, handleRejected)
+
+      .addCase(
+        fetchUpdateStatusTasksData.fulfilled,
+        handleFullfilled('fetchUpdateStatusTasks')
+      )
+      .addCase(fetchUpdateStatusTasksData.rejected, handleRejected)
+
+      .addCase(
+        fetchUpdateStatusCommentTasksData.fulfilled,
+        handleFullfilled('fetchUpdateStatusCommentTasks')
+      )
+      .addCase(fetchUpdateStatusCommentTasksData.rejected, handleRejected)
+
+      .addCase(
+        fetchDeleteItemData.fulfilled,
+        handleFullfilled('fetchDeleteItem')
+      )
+      .addCase(fetchDeleteItemData.rejected, handleRejected)
+
+      .addCase(
+        fetchStatusTasksData.fulfilled,
+        handleFullfilled('fetchPostStatusTasks')
+      )
+      .addCase(fetchStatusTasksData.rejected, handleRejected);
   },
 });
 

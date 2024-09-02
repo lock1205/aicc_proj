@@ -40,3 +40,31 @@ exports.updateMyAgreeTask = async (req, res) => {
     return res.status(500).json({ message: 'Update Completed Fail' + error });
   }
 };
+
+exports.updateStatusTask = async (req, res) => {
+  const { status, arg_num } = req.body;
+
+  try {
+    const result = await database.query(
+      'UPDATE agreement SET status = $1 WHERE arg_num = $2',
+      [status, arg_num]
+    );
+    return res.status(200).json({ message: 'Status Updated Successfully' });
+  } catch (error) {
+    return res.status(500).json({ message: 'Update Completed Fail' + error });
+  }
+};
+
+exports.updateStatusCommentTask = async (req, res) => {
+  const { status, comment, arg_num } = req.body;
+
+  try {
+    const result = await database.query(
+      'UPDATE agreement SET status = $1, comment = $2 WHERE arg_num = $3',
+      [status, comment, arg_num]
+    );
+    return res.status(200).json({ message: 'Status Updated Successfully' });
+  } catch (error) {
+    return res.status(500).json({ message: 'Update Completed Fail' + error });
+  }
+};

@@ -5,16 +5,28 @@ import { closeModal } from '../../redux/slice/modalSlice';
 import { features } from '../../ai_info/data';
 import { toast } from 'react-toastify';
 import {
+  fetchDeleteItemData,
+  fetchGetTasksData,
   fetchGetUserTasksData,
   fetchUpdateAgreeTasksData,
+  fetchUpdateStatusCommentTasksData,
+  fetchUpdateStatusTasksData,
 } from '../../redux/slice/apiSlice';
-const DetailAgree = () => {
+const DetailAgree = ({ props }) => {
   const dispatch = useDispatch();
   const onClose = () => {
     dispatch(closeModal());
   };
   const authData = useSelector((state) => state.auth.authData);
   const { modalType, task } = useSelector((state) => state.modal);
+
+  const [status, setStatus] = useState({ status: '', arg_num: '' });
+
+  const [proposal, setproposal] = useState({
+    status: '',
+    comment: '',
+    arg_num: '',
+  });
 
   const [formData, setFormData] = useState({
     arg_num: '',
@@ -57,10 +69,6 @@ const DetailAgree = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const testSubmit = (e) => {
-    console.log(formData);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,6 +80,66 @@ const DetailAgree = () => {
     } catch (error) {
       console.error('Error adding task: ', error);
       toast.error('협의서 수정이 실패했습니다.');
+    }
+  };
+  const handleCompleteSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setStatus({ status: '완료', arg_num: task.arg_num });
+      await dispatch(fetchUpdateStatusTasksData(status)).unwrap();
+      toast.success('협의서가 완료되었습니다.');
+      onClose();
+      await dispatch(fetchGetTasksData()).unwrap();
+    } catch (error) {
+      console.error('Error adding task: ', error);
+      toast.error('협의서 수정이 실패했습니다.');
+    }
+  };
+  const handleprocessingSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setStatus({ status: '진행중', arg_num: task.arg_num });
+      await dispatch(fetchUpdateStatusTasksData(status)).unwrap();
+      toast.success('협의서가 완료되었습니다.');
+      onClose();
+      await dispatch(fetchGetTasksData()).unwrap();
+    } catch (error) {
+      console.error('Error adding task: ', error);
+      toast.error('협의서 수정이 실패했습니다.');
+    }
+  };
+  const handleProposalSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setproposal({
+        status: '재협의',
+        comment: task.comment,
+        arg_num: task.arg_num,
+      });
+      await dispatch(fetchUpdateStatusCommentTasksData(proposal)).unwrap();
+      toast.success('협의서를 제안하였습니다.');
+      onClose();
+      await dispatch(fetchGetTasksData()).unwrap();
+    } catch (error) {
+      console.error('Error adding task: ', error);
+      toast.error('협의서 수정이 실패했습니다.');
+    }
+  };
+  const deleteItem = async () => {
+    const confirm = window.confirm('협의서를 삭제하시겠습니까?');
+
+    if (!confirm) return;
+
+    try {
+      await dispatch(fetchDeleteItemData(task.arg_num)).unwrap();
+      toast.success('협의서가이 삭제되었습니다.');
+      await dispatch(fetchGetUserTasksData(authData.user_key)).unwrap();
+    } catch (error) {
+      toast.error('협의서 삭제에 실패했습니다.');
+      console.error(error);
     }
   };
   return (
@@ -91,9 +159,9 @@ const DetailAgree = () => {
               value={formData.title}
               id=""
               required
-              {...(authData.email == 'admin@amin'
+              {...(authData.email === 'admin@admin'
                 ? { readOnly: true }
-                : formData.status == '진행중' || formData.status == '완료'
+                : formData.status === '진행중' || formData.status === '완료'
                 ? { readOnly: true }
                 : { readOnly: false })}
             ></input>
@@ -108,9 +176,9 @@ const DetailAgree = () => {
               onChange={handleChange}
               value={formData.description}
               required
-              {...(authData.email == 'admin@amin'
+              {...(authData.email === 'admin@admin'
                 ? { readOnly: true }
-                : formData.status == '진행중' || formData.status == '완료'
+                : formData.status === '진행중' || formData.status === '완료'
                 ? { readOnly: true }
                 : { readOnly: false })}
             ></textarea>
@@ -125,9 +193,9 @@ const DetailAgree = () => {
               onChange={handleChange}
               value={formData.company_name}
               required
-              {...(authData.email == 'admin@amin'
+              {...(authData.email === 'admin@admin'
                 ? { readOnly: true }
-                : formData.status == '진행중' || formData.status == '완료'
+                : formData.status === '진행중' || formData.status === '완료'
                 ? { readOnly: true }
                 : { readOnly: false })}
             ></input>
@@ -141,9 +209,9 @@ const DetailAgree = () => {
               onChange={handleChange}
               value={formData.level}
               required
-              {...(authData.email == 'admin@amin'
+              {...(authData.email === 'admin@admin'
                 ? { readOnly: true }
-                : formData.status == '진행중' || formData.status == '완료'
+                : formData.status === '진행중' || formData.status === '완료'
                 ? { readOnly: true }
                 : { readOnly: false })}
             ></input>
@@ -157,9 +225,9 @@ const DetailAgree = () => {
               onChange={handleChange}
               value={formData.master_name}
               required
-              {...(authData.email == 'admin@amin'
+              {...(authData.email === 'admin@admin'
                 ? { readOnly: true }
-                : formData.status == '진행중' || formData.status == '완료'
+                : formData.status === '진행중' || formData.status === '완료'
                 ? { readOnly: true }
                 : { readOnly: false })}
             ></input>
@@ -173,9 +241,9 @@ const DetailAgree = () => {
               onChange={handleChange}
               value={formData.master_tel}
               required
-              {...(authData.email == 'admin@amin'
+              {...(authData.email === 'admin@admin'
                 ? { readOnly: true }
-                : formData.status == '진행중' || formData.status == '완료'
+                : formData.status === '진행중' || formData.status === '완료'
                 ? { readOnly: true }
                 : { readOnly: false })}
             ></input>
@@ -189,9 +257,9 @@ const DetailAgree = () => {
               onChange={handleChange}
               value={formData.end_date}
               required
-              {...(authData.email == 'admin@amin'
+              {...(authData.email === 'admin@admin'
                 ? { readOnly: true }
-                : formData.status == '진행중' || formData.status == '완료'
+                : formData.status === '진행중' || formData.status === '완료'
                 ? { readOnly: true }
                 : { readOnly: false })}
             ></input>
@@ -205,9 +273,9 @@ const DetailAgree = () => {
               onChange={handleChange}
               value={formData.sum_money}
               required
-              {...(authData.email == 'admin@amin'
+              {...(authData.email === 'admin@admin'
                 ? { readOnly: true }
-                : formData.status == '진행중' || formData.status == '완료'
+                : formData.status === '진행중' || formData.status === '완료'
                 ? { readOnly: true }
                 : { readOnly: false })}
             ></input>
@@ -218,9 +286,9 @@ const DetailAgree = () => {
               <select
                 name="ai_data"
                 class="select"
-                {...(authData.email == 'admin@amin'
+                {...(authData.email === 'admin@admin'
                   ? { disabled: true }
-                  : formData.status == '진행중' || formData.status == '완료'
+                  : formData.status === '진행중' || formData.status === '완료'
                   ? { disabled: true }
                   : { disabled: false })}
               >
@@ -238,9 +306,9 @@ const DetailAgree = () => {
               <select
                 name="ai_media"
                 class="select"
-                {...(authData.email == 'admin@amin'
+                {...(authData.email === 'admin@admin'
                   ? { disabled: true }
-                  : formData.status == '진행중' || formData.status == '완료'
+                  : formData.status === '진행중' || formData.status === '완료'
                   ? { disabled: true }
                   : { disabled: false })}
               >
@@ -258,9 +326,9 @@ const DetailAgree = () => {
               <select
                 name="ai_image"
                 class="select"
-                {...(authData.email == 'admin@amin'
+                {...(authData.email === 'admin@admin'
                   ? { disabled: true }
-                  : formData.status == '진행중' || formData.status == '완료'
+                  : formData.status === '진행중' || formData.status === '완료'
                   ? { disabled: true }
                   : { disabled: false })}
               >
@@ -278,9 +346,9 @@ const DetailAgree = () => {
               <select
                 name="ai_lang"
                 class="select"
-                {...(authData.email == 'admin@amin'
+                {...(authData.email === 'admin@admin'
                   ? { disabled: true }
-                  : formData.status == '진행중' || formData.status == '완료'
+                  : formData.status === '진행중' || formData.status === '완료'
                   ? { disabled: true }
                   : { disabled: false })}
               >
@@ -301,34 +369,42 @@ const DetailAgree = () => {
               className=""
               name="comment"
               id=""
-              {...(authData.email != 'admin@amin' && { readOnly: true })}
+              {...(authData.email !== 'admin@admin' && { readOnly: true })}
             ></textarea>
           </div>
-          {(authData.email === 'admin@amin' && formData.status === '신규') ||
-          (authData.email === 'admin@amin' && formData.status === '재협의') ? (
+          {(authData.email === 'admin@admin' && formData.status === '신규') ||
+          (authData.email === 'admin@admin' && formData.status === '재협의') ? (
             <div className="DA_modal-footer">
-              <input type="submit" onClick={handleSubmit}>
+              <button type="submit" onClick={handleProposalSubmit}>
                 제안
-              </input>
-              <button type="submit" onClick={testSubmit}>
+              </button>
+              <button type="submit" onClick={handleprocessingSubmit}>
                 진행
               </button>
+              <button type="submit" onClick={onClose}>
+                닫기
+              </button>
             </div>
-          ) : authData.email === 'admin@amin' && formData.status === '진행' ? (
+          ) : authData.email === 'admin@admin' &&
+            formData.status === '진행중' ? (
             <div className="DA_modal-footer">
-              <button type="submit" onClick={handleSubmit}>
+              <button type="submit" onClick={handleCompleteSubmit}>
                 완료
               </button>
               <button type="submit" onClick={onClose}>
                 닫기
               </button>
             </div>
-          ) : (authData.email !== 'admin@amin' && formData.status === '신규') ||
-            (authData.email !== 'admin@amin' &&
+          ) : (authData.email !== 'admin@admin' &&
+              formData.status === '신규') ||
+            (authData.email !== 'admin@admin' &&
               formData.status === '재협의') ? (
             <div className="DA_modal-footer">
               <button type="submit" onClick={handleSubmit}>
                 수정
+              </button>
+              <button type="submit" onClick={deleteItem}>
+                삭제
               </button>
               <button type="submit" onClick={onClose}>
                 닫기
