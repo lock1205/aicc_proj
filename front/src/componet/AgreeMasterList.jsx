@@ -89,9 +89,23 @@ const AgreeMasterList = () => {
     <div className="bg">
       <NavBar />
       <div className="aml_container">
+        <h2>Agreement Admin</h2>
+        <h3>쉽고 간편하게 의뢰받은 협의서를 관리하세요!</h3>
         {isOpen && <DetailAgree />}
-        <SearchBar props={setSearchQuery} />
-        <FilterBar Comeinfunc={testfunction} />
+
+        <div className="aml_FilSea">
+          <SearchBar props={setSearchQuery} />
+          <FilterBar Comeinfunc={testfunction} />
+        </div>
+        <div className="aml_title_container">
+          <div className="aml_title">
+            <p>진행 상태</p>
+            <p>타이틀</p>
+            <p>회사</p>
+            <p>희망 마감 날짜</p>
+          </div>
+        </div>
+
         {data?.map((item, idx) => (
           <List key={idx} task={item} />
         ))}

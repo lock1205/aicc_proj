@@ -2,11 +2,13 @@ import React from 'react';
 import '../design/agreeFinsh.css';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import NavBar from './NavBar';
 
 const AgreeFinish = () => {
   const authData = useSelector((state) => state.auth.authData);
   return (
     <div className="bg">
+      <NavBar />
       <div className="af_container">
         <div className="af_top">
           <h1>AICO</h1>
