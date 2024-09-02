@@ -76,6 +76,11 @@ textarea{
   resize: none;
 }
 
+input::placeholder,
+textarea::placeholder {
+  color: #cccccc;
+}
+
 .Agree-submit_tip{
   font-size: small;
   color: #ccc;

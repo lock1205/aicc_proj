@@ -103,6 +103,7 @@ const ColaboAgreement = () => {
                   id=""
                   onChange={handleChange}
                   value={formData.title}
+                  placeholder="예) 애니메이션 그림체 일정하게 맞추는 AI솔루션"
                 ></input>
               </div>
               <div className="Agree-decription">
@@ -113,6 +114,7 @@ const ColaboAgreement = () => {
                   id=""
                   onChange={handleChange}
                   value={formData.description}
+                  placeholder="예) 프로젝트 목표,프로젝트 범위, 이미지 처리 방식, 처리 속도, 품질 기준, 시스템 호환 등. "
                 ></textarea>
               </div>
               <div className="Agree-myInfo">
@@ -152,6 +154,7 @@ const ColaboAgreement = () => {
                     id=""
                     onChange={handleChange}
                     value={formData.master_name}
+                    placeholder="홍길동"
                   ></input>
                 </div>
                 <div className="Agree-master_tel">
@@ -174,7 +177,7 @@ const ColaboAgreement = () => {
 
               <div className="Agree-end_date">
                 <p>
-                  희망마감기한<span>(필수)</span>
+                  희망 마감기한<span>(필수)</span>
                 </p>
                 <input
                   className=""
@@ -182,11 +185,12 @@ const ColaboAgreement = () => {
                   id=""
                   onChange={handleChange}
                   value={formData.end_date}
+                  placeholder="2024-09-02"
                 ></input>
               </div>
               <div className="Agree-sum_money">
                 <p>
-                  예상예산<span>(필수)</span>
+                  예상 예산<span>(필수)</span>
                 </p>
                 <input
                   className=""
@@ -194,6 +198,7 @@ const ColaboAgreement = () => {
                   id=""
                   onChange={handleChange}
                   value={formData.sum_money}
+                  placeholder="000만원"
                 ></input>
               </div>
             </div>
