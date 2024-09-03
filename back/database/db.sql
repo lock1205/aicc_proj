@@ -28,8 +28,6 @@ INSERT INTO task(id, title, description, date, isCompleted, isImportant, userId)
 
 
 
-
-
 --사용자 테이블 생성--
 CREATE TABLE users (
     google_auth TEXT,
@@ -62,6 +60,14 @@ CREATE TABLE agreement (
     ai_lang text
 );
 
+-- 패키지 테이블 생성 --
+
+CREATE TABLE packges{
+   ai_data text,
+    ai_media text,
+    ai_lang text
+    ai_image text
+}
 
 --컬럼 추가 생성--
 ALTER TABLE TEST ADD COLUMN tel varchar(11) NOT NULL;
