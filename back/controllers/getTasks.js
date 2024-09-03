@@ -36,3 +36,15 @@ exports.getSearchTasks = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+
+exports.getCategory = async (req, res) => {
+  try {
+    const allCategory = await database.query(
+      'SELECT ai_data,ai_media,ai_lang,ai_image FROM packges'
+    ); // agreement테이블에서 ai 4행을 선택
+
+    return res.status(201).json(allCategory.rows);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
