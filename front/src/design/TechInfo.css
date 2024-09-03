@@ -12,6 +12,13 @@
 
 .tech_title{
   color: #7407FF;
+  font-family: "Gowun Batang", serif;
+  font-weight: 700;
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
 .tech_container::-webkit-scrollbar {

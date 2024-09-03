@@ -74,64 +74,62 @@ const TechnologyOverview = () => {
     <div className="bg">
       <NavBar />
       <div className="tech_container">
-        <div className="tech_title">
-          AICO 보유 기술
-          <div className="tech_tabs">
-            <button
-              className={`tech_tab ${
-                selectedCategory === '전체' ? 'active' : ''
-              }`}
-              onClick={() => setSelectedCategory('전체')}
-            >
-              전체
-            </button>
-            <button
-              className={`tech_tab ${
-                selectedCategory === '클라우드 생성' ? 'active' : ''
-              }`}
-              onClick={() => setSelectedCategory('클라우드 생성')}
-            >
-              클라우드 생성
-            </button>
-            <button
-              className={`tech_tab ${
-                selectedCategory === 'AI 컨택센터' ? 'active' : ''
-              }`}
-              onClick={() => setSelectedCategory('AI 컨택센터')}
-            >
-              AI 컨택센터
-            </button>
-            <button
-              className={`tech_tab ${
-                selectedCategory === '금융 서비스' ? 'active' : ''
-              }`}
-              onClick={() => setSelectedCategory('금융 서비스')}
-            >
-              금융 서비스
-            </button>
-            <button
-              className={`tech_tab ${
-                selectedCategory === '애니 제작' ? 'active' : ''
-              }`}
-              onClick={() => setSelectedCategory('애니 제작')}
-            >
-              애니 제작
-            </button>
-          </div>
-          {filteredTechnologies.map((tech, index) => (
-            <div className="tech-row" key={index}>
-              <div className="tech-logo">{tech.logo}</div>
-              <div className="tech-description">{tech.description}</div>
-              <div className="tech-tags">
-                {tech.tags.map((tag, i) => (
-                  <span key={i} className="tech-tag">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+        <div className="tech_title">AICO 보유 기술</div>
+        <div className="tech_tabs">
+          <button
+            className={`tech_tab ${
+              selectedCategory === '전체' ? 'active' : ''
+            }`}
+            onClick={() => setSelectedCategory('전체')}
+          >
+            전체
+          </button>
+          <button
+            className={`tech_tab ${
+              selectedCategory === '클라우드 생성' ? 'active' : ''
+            }`}
+            onClick={() => setSelectedCategory('클라우드 생성')}
+          >
+            클라우드 생성
+          </button>
+          <button
+            className={`tech_tab ${
+              selectedCategory === 'AI 컨택센터' ? 'active' : ''
+            }`}
+            onClick={() => setSelectedCategory('AI 컨택센터')}
+          >
+            AI 컨택센터
+          </button>
+          <button
+            className={`tech_tab ${
+              selectedCategory === '금융 서비스' ? 'active' : ''
+            }`}
+            onClick={() => setSelectedCategory('금융 서비스')}
+          >
+            금융 서비스
+          </button>
+          <button
+            className={`tech_tab ${
+              selectedCategory === '애니 제작' ? 'active' : ''
+            }`}
+            onClick={() => setSelectedCategory('애니 제작')}
+          >
+            애니 제작
+          </button>
         </div>
+        {filteredTechnologies.map((tech, index) => (
+          <div className="tech-row" key={index}>
+            <div className="tech-logo">{tech.logo}</div>
+            <div className="tech-description">{tech.description}</div>
+            <div className="tech-tags">
+              {tech.tags.map((tag, i) => (
+                <span key={i} className="tech-tag">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
