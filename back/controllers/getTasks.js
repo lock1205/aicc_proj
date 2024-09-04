@@ -37,10 +37,11 @@ exports.getSearchTasks = async (req, res) => {
   }
 };
 
+// 패키지
 exports.getCategory = async (req, res) => {
   try {
     const allCategory = await database.query(
-      'SELECT ai_data,ai_media,ai_lang,ai_image FROM packges'
+      'SELECT ai_data,ai_media,ai_lang,ai_image,package_name,package_desc FROM packages'
     ); // agreement테이블에서 ai 4행을 선택
 
     return res.status(201).json(allCategory.rows);

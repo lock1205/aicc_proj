@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { postPackages } = require('../controllers/postPackages');
 const { postTasks, postStatusTasks } = require('../controllers/postTasks');
 const { postUser, loginUser } = require('../controllers/postUser');
 
@@ -14,5 +15,6 @@ router.post('/register_user', postUser);
 router.post('/post_tasks', postTasks);
 router.post('/login_user', loginUser);
 router.post('/post_status', postStatusTasks);
+router.post('/post_Packages', postPackages);
 
 module.exports = router;
