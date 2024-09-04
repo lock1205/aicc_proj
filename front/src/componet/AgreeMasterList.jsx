@@ -8,34 +8,49 @@ import { useSelector } from 'react-redux';
 import NavBar from './NavBar';
 import DetailAgree from './public/DetailAgree';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const AgreeMasterList = () => {
+  const authData = useSelector((state) => state.auth.authData);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filter, setFilter] = useState({ status: '전체' });
+  const [filter, setFilter] = useState({ status: '신규' });
   const [data, setData] = useState([]);
+
+  const navigator = useNavigate();
 
   const isOpen = useSelector((state) => state.modal.isOpen);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/get_tasks');
-        const result = await response.json();
-        console.log(result);
-        setData(result);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch('http://localhost:8080/get_tasks');
+  //       const result = await response.json();
+  //       console.log(result);
+  //       setData(result);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
+
+  useEffect(() => {
+    if (!authData) {
+      navigator('/');
+      return;
+    }
+  }, [authData]);
 
   useEffect(() => {
     axios
       .post('http://localhost:8080/post_status', filter)
       .then((res) => {
         if (res.status === 201) {
-          setData(res.data);
+          if (filter.status === '') {
+            setFilter({ status: '신규' });
+          } else {
+            setData(res.data);
+          }
         } else {
           console.log('error');
         }
@@ -52,7 +67,6 @@ const AgreeMasterList = () => {
       .then((res) => {
         if (res.status === 201) {
           setData(res.data);
-          console.log(res.data);
         } else {
           console.log('error');
         }

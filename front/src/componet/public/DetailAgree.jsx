@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../../design/DetailAgree.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../redux/slice/modalSlice';
+import { IoMdClose } from 'react-icons/io';
 import { features } from '../../ai_info/data';
 import { toast } from 'react-toastify';
 import {
@@ -146,7 +147,10 @@ const DetailAgree = ({ props }) => {
     <div className="DA_modal-overlay">
       <div className="DA_modal-content">
         <div className="DA_modal-header">
-          <div>협의서 상세내용</div>
+          <div>
+            협의서 상세내용
+            <IoMdClose onClick={onClose} />
+          </div>
         </div>
         <form className="DA_modal-body">
           <div className="title">

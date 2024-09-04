@@ -7,7 +7,6 @@ import { logout } from '../redux/slice/authSlice';
 const NavBar = () => {
   const authData = useSelector((state) => state.auth.authData);
 
-  console.log(authData);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -23,10 +22,6 @@ const NavBar = () => {
         <Link to={'/recommend'}>
           <button className="main-pack">패키지</button>
         </Link>
-
-        <Link to={'/agreeMasterList'}>
-          <button className="Home">관리자페이지</button>
-        </Link>
       </div>
       <button className="main-logo">
         <Link to="/">
@@ -36,7 +31,11 @@ const NavBar = () => {
       </button>
 
       <div className="right">
-        {authData ? (
+        {authData && authData.email === 'admin@admin' ? (
+          <Link to={'/agreeMasterList'}>
+            <button className="main-pack">관리자 페이지</button>
+          </Link>
+        ) : authData ? (
           <Link to={'/mypage'}>
             <button className="Home">MY HOME</button>
           </Link>

@@ -5,6 +5,7 @@ import { fetchGetUserTasksData } from '../../redux/slice/apiSlice';
 import ItemBar from '../public/ItemBar';
 import '../../design/MyPage.css';
 import DetailAgree from '../public/DetailAgree';
+import { useNavigate } from 'react-router-dom';
 
 const MyAgree = () => {
   const [loading, setLoading] = useState(false);
@@ -12,13 +13,15 @@ const MyAgree = () => {
   const authData = useSelector((state) => state.auth.authData);
 
   const dispatch = useDispatch();
+  const navigator = useNavigate();
 
   const getUserAgrData = useSelector((state) => state.api.fetchGetUserTasks);
 
   const isOpen = useSelector((state) => state.modal.isOpen);
 
   useEffect(() => {
-    if (!authData.user_key) {
+    if (!authData) {
+      navigator('/');
       return;
     }
 
@@ -33,7 +36,7 @@ const MyAgree = () => {
       }
     };
     fetchGetAgrees();
-  }, [dispatch, authData.user_key]);
+  }, [dispatch, authData]);
 
   return (
     <div className="bg">
