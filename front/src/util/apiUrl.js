@@ -15,6 +15,10 @@ const DELETE_TASKS_API_URL = 'http://localhost:8080/delete_task';
 //Mypage 협의서 수정
 const UPDATE_USER_AGREE_API_URL = 'http://localhost:8080/update_agree';
 
+//  패키지 카테고리 받아오기
+const GET_PACKAGES_CATEGORY_API_URL =
+  'http://localhost:8080/get_Category/:text';
+
 export {
   REGISTER_USER_API_URL,
   POST_TASKS_API_URL,
@@ -25,4 +29,5 @@ export {
   UPDADTE_AGREE_STATUS_COMMENT_API_URL,
   DELETE_TASKS_API_URL,
   POST_STATUS_TASKS_API_URL,
+  GET_PACKAGES_CATEGORY_API_URL,
 };

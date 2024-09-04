@@ -62,12 +62,17 @@ CREATE TABLE agreement (
 
 -- 패키지 테이블 생성 --
 
-CREATE TABLE packges{
-   ai_data text,
+CREATE TABLE packages{
+    package_name text,
+    package_desc text,
+    ai_data text,
     ai_media text,
     ai_lang text
     ai_image text
 }
+
+-- 테이블 이름 변경 --
+ALTER TABLE {테이블명} RENAME TO {새 테이블명};
 
 --컬럼 추가 생성--
 ALTER TABLE TEST ADD COLUMN tel varchar(11) NOT NULL;

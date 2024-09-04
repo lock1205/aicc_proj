@@ -10,6 +10,7 @@ import {
   UPDADTE_AGREE_STATUS_COMMENT_API_URL,
   DELETE_TASKS_API_URL,
   POST_STATUS_TASKS_API_URL,
+  GET_PACKAGES_CATEGORY_API_URL,
 } from '../../util/apiUrl';
 
 import {
@@ -79,6 +80,17 @@ const deleteItemFetchThunk = (actionType, apiURL) => {
   });
 };
 
+// 패키지 카데고리 받아오기
+const getPackagesCategoryFetchThunk = (actionType, apiURL) => {
+  return createAsyncThunk(actionType, async (getGategory) => {
+    console.log(apiURL, getGategory);
+    const options = {
+      body: JSON.stringify(getGategory), //표준 json 문자열로 변환
+    };
+    return await getRequest(apiURL, getGategory);
+  });
+};
+
 //유저 실제 데이터를 db에 넣을 수 있는 함수
 export const fetchPostItemData = postItemFetchThunk(
   'fetchPostItem',
@@ -126,6 +138,12 @@ export const fetchStatusTasksData = postTasksFetchThunk(
   POST_STATUS_TASKS_API_URL
 );
 
+// 패키지 카데고리 프론트에서 데이터가 보여지는 것
+export const fetchPackagesCategory = getPackagesCategoryFetchThunk(
+  'fetchGetPackagesCategory',
+  GET_PACKAGES_CATEGORY_API_URL
+);
+
 //create slice에서 사용하는 상태 체크
 const handleFullfilled = (stateKey) => (state, action) => {
   state[stateKey] = action.payload;
@@ -147,6 +165,7 @@ const apiSlice = createSlice({
     fetchUpdateStatusCommentTasks: null,
     fetchDeleteItem: null,
     fetchPostStatusTasks: null,
+    fetchGetPackagesCategory: null,
   },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
@@ -191,7 +210,13 @@ const apiSlice = createSlice({
         fetchStatusTasksData.fulfilled,
         handleFullfilled('fetchPostStatusTasks')
       )
-      .addCase(fetchStatusTasksData.rejected, handleRejected);
+      .addCase(fetchStatusTasksData.rejected, handleRejected)
+
+      .addCase(
+        fetchPackagesCategory.fulfilled,
+        handleFullfilled('fetchGetPackagesCategory')
+      )
+      .addCase(fetchPackagesCategory.rejected, handleRejected);
   },
 });
 
