@@ -9,12 +9,14 @@ import {
   fetchDeleteItemData,
   fetchGetTasksData,
   fetchGetUserTasksData,
+  fetchStatusTasksData,
   fetchUpdateAgreeTasksData,
   fetchUpdateStatusCommentTasksData,
   fetchUpdateStatusTasksData,
 } from '../../redux/slice/apiSlice';
-const DetailAgree = ({ props }) => {
+const DetailAgree = () => {
   const dispatch = useDispatch();
+
   const onClose = () => {
     dispatch(closeModal());
   };
@@ -23,7 +25,7 @@ const DetailAgree = ({ props }) => {
 
   const [status, setStatus] = useState({ status: '', arg_num: '' });
 
-  const [proposal, setproposal] = useState({
+  const [proposal, setProposal] = useState({
     status: '',
     comment: '',
     arg_num: '',
@@ -70,6 +72,66 @@ const DetailAgree = ({ props }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleStatusComment = (e) => {
+    e.preventDefault();
+
+    setProposal({
+      status: '재협의',
+      comment: formData.comment,
+      arg_num: formData.arg_num,
+    });
+    // handleProposalSubmit();
+  };
+  const handleStatus = (e) => {
+    e.preventDefault();
+    if (formData.status === '신규' || formData.status === '재협의') {
+      setStatus({
+        status: '진행중',
+        arg_num: formData.arg_num,
+      });
+    } else {
+      setStatus({
+        status: '완료',
+        arg_num: formData.arg_num,
+      });
+    }
+  };
+  useEffect(() => {
+    //useState의 비동기적 렌더링으로 인해 설정해줌
+    if (proposal.status === '재협의') {
+      handleProposalSubmit();
+    } else if (status.status === '진행중' || status.status === '완료') {
+      CompleteOrProcessingSubmit();
+    }
+  }, [proposal, status]);
+
+  //관리자에게 보여지는 협의서
+  const CompleteOrProcessingSubmit = async (e) => {
+    try {
+      await dispatch(fetchUpdateStatusTasksData(status)).unwrap();
+      if (status.status === '완료') toast.success('사업이 완료되었습니다.');
+      else toast.success('사업을 진행되었습니다.');
+
+      onClose();
+    } catch (error) {
+      console.error('Error adding task: ', error);
+      toast.error('협의서 수정이 실패했습니다.');
+    }
+  };
+
+  const handleProposalSubmit = async (e) => {
+    try {
+      await dispatch(fetchUpdateStatusCommentTasksData(proposal)).unwrap();
+      toast.success('협의서를 제안하였습니다.');
+
+      onClose();
+    } catch (error) {
+      console.error('Error adding task: ', error);
+      toast.error('협의서 수정이 실패했습니다.');
+    }
+  };
+
+  //사용자에게 보여지는 협의서
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -78,52 +140,6 @@ const DetailAgree = ({ props }) => {
       toast.success('협의서가 수정되었습니다.');
       onClose();
       await dispatch(fetchGetUserTasksData(authData.user_key)).unwrap();
-    } catch (error) {
-      console.error('Error adding task: ', error);
-      toast.error('협의서 수정이 실패했습니다.');
-    }
-  };
-  const handleCompleteSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      setStatus({ status: '완료', arg_num: task.arg_num });
-      await dispatch(fetchUpdateStatusTasksData(status)).unwrap();
-      toast.success('협의서가 완료되었습니다.');
-      onClose();
-      await dispatch(fetchGetTasksData()).unwrap();
-    } catch (error) {
-      console.error('Error adding task: ', error);
-      toast.error('협의서 수정이 실패했습니다.');
-    }
-  };
-  const handleprocessingSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      setStatus({ status: '진행중', arg_num: task.arg_num });
-      await dispatch(fetchUpdateStatusTasksData(status)).unwrap();
-      toast.success('협의서가 완료되었습니다.');
-      onClose();
-      await dispatch(fetchGetTasksData()).unwrap();
-    } catch (error) {
-      console.error('Error adding task: ', error);
-      toast.error('협의서 수정이 실패했습니다.');
-    }
-  };
-  const handleProposalSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      setproposal({
-        status: '재협의',
-        comment: task.comment,
-        arg_num: task.arg_num,
-      });
-      await dispatch(fetchUpdateStatusCommentTasksData(proposal)).unwrap();
-      toast.success('협의서를 제안하였습니다.');
-      onClose();
-      await dispatch(fetchGetTasksData()).unwrap();
     } catch (error) {
       console.error('Error adding task: ', error);
       toast.error('협의서 수정이 실패했습니다.');
@@ -290,6 +306,7 @@ const DetailAgree = ({ props }) => {
               <select
                 name="ai_data"
                 class="select"
+                value={formData.ai_data}
                 {...(authData.email === 'admin@admin'
                   ? { disabled: true }
                   : formData.status === '진행중' || formData.status === '완료'
@@ -310,6 +327,7 @@ const DetailAgree = ({ props }) => {
               <select
                 name="ai_media"
                 class="select"
+                value={formData.ai_media}
                 {...(authData.email === 'admin@admin'
                   ? { disabled: true }
                   : formData.status === '진행중' || formData.status === '완료'
@@ -330,6 +348,7 @@ const DetailAgree = ({ props }) => {
               <select
                 name="ai_image"
                 class="select"
+                value={formData.ai_image}
                 {...(authData.email === 'admin@admin'
                   ? { disabled: true }
                   : formData.status === '진행중' || formData.status === '완료'
@@ -350,6 +369,7 @@ const DetailAgree = ({ props }) => {
               <select
                 name="ai_lang"
                 class="select"
+                value={formData.ai_lang}
                 {...(authData.email === 'admin@admin'
                   ? { disabled: true }
                   : formData.status === '진행중' || formData.status === '완료'
@@ -373,16 +393,21 @@ const DetailAgree = ({ props }) => {
               className=""
               name="comment"
               id=""
-              {...(authData.email !== 'admin@admin' && { readOnly: true })}
+              onChange={handleChange}
+              value={formData.comment}
+              {...(authData.email !== 'admin@admin' ||
+              formData.status === '진행중'
+                ? { readOnly: true }
+                : { readOnly: false })}
             ></textarea>
           </div>
           {(authData.email === 'admin@admin' && formData.status === '신규') ||
           (authData.email === 'admin@admin' && formData.status === '재협의') ? (
             <div className="DA_modal-footer">
-              <button type="submit" onClick={handleProposalSubmit}>
+              <button type="submit" onClick={handleStatusComment}>
                 제안
               </button>
-              <button type="submit" onClick={handleprocessingSubmit}>
+              <button type="submit" onClick={handleStatus}>
                 진행
               </button>
               <button type="submit" onClick={onClose}>
@@ -392,7 +417,7 @@ const DetailAgree = ({ props }) => {
           ) : authData.email === 'admin@admin' &&
             formData.status === '진행중' ? (
             <div className="DA_modal-footer">
-              <button type="submit" onClick={handleCompleteSubmit}>
+              <button type="submit" onClick={handleStatus}>
                 완료
               </button>
               <button type="submit" onClick={onClose}>

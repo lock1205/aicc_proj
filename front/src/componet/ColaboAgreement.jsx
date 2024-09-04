@@ -183,6 +183,8 @@ const ColaboAgreement = () => {
                   className=""
                   name="end_date"
                   id=""
+                  type="date"
+                  // 달력 보일수 있도록 추가
                   onChange={handleChange}
                   value={formData.end_date}
                   placeholder="2000-09-02"

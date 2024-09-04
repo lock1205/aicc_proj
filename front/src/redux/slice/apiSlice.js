@@ -149,7 +149,6 @@ const handleFullfilled = (stateKey) => (state, action) => {
   state[stateKey] = action.payload;
 };
 const handleRejected = (state, action) => {
-  console.log(action.payload);
   state.isError = true;
 };
 

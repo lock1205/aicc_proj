@@ -59,9 +59,10 @@ const AgreeMasterList = () => {
         console.log(error);
         return;
       });
-  }, [filter]);
+  }, [filter, isOpen]); //협의서 상태를 변경 후 리스트로 돌아올 때 리렌더링 되는 부분을 isOpen(모달상태)따라 변경, 이렇게 변경하지 않고 useState 변수로 변경을 할 경우 바로 반영이 안되는 버그 있었음
 
   useEffect(() => {
+    if (!searchQuery) return; //검색어가 없을 시에 대한 오류문구 해결(프로그램에 지장은 없음)
     axios
       .get(`http://localhost:8080/get_searchTasks/${searchQuery}`)
       .then((res) => {
