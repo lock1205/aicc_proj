@@ -83,11 +83,11 @@ const deleteItemFetchThunk = (actionType, apiURL) => {
 // 패키지 카데고리 받아오기
 const getPackagesCategoryFetchThunk = (actionType, apiURL) => {
   return createAsyncThunk(actionType, async (getGategory) => {
-    console.log(apiURL, getGategory);
+    console.log(getGategory);
     const options = {
       body: JSON.stringify(getGategory), //표준 json 문자열로 변환
     };
-    return await getRequest(apiURL, getGategory);
+    return await getRequest(apiURL, options);
   });
 };
 
