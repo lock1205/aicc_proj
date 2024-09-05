@@ -35,27 +35,26 @@ function LoginForm() {
           const decoded = jwtDecode(res.data.token);
           dispatch(login({ authData: decoded }));
           navigator('/');
-        } else {
-          setModalMessage('등록된 아이디 또는 비밀번호가 잘못되었습니다.');
-          setModalOpen(true);
         }
       })
       .catch((error) => {
+        if (error.response) {
+          if (error.response.status === 401) {
+            setModalMessage('비밀번호가 잘못되었습니다.');
+          } else if (error.response.status === 404) {
+            setModalMessage('등록된 ID를 찾을 수 없습니다.');
+          } else {
         setModalMessage(
           '서버에서 오류가 발생했습니다. 나중에 다시 시도해주세요'
         );
+          }
+        } else {
+          setModalMessage('알 수 없는 오류가 발생했습니다.');
+        }
         setModalOpen(true);
         console.log(error);
         return;
       });
-
-    // const response = await fetch('http://localhost:8080/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ value }),
-    // });
   };
 
   // 모달을 닫는 함수

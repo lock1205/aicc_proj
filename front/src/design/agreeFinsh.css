@@ -37,8 +37,11 @@
   color: red;
 }
 
-.Agree-buttonBox {
+.Agree-buttonBox  {
+  display: flex;
+  justify-content: center;
   text-align: center;
+  gap: 20px;
 }
 
 .Agree-register {
@@ -84,6 +87,7 @@
 }
 
 .Agree-submit_tip{
+  text-align: center;
   font-size: small;
   color: #ccc;
 }

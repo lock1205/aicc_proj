@@ -8,58 +8,78 @@ import { features } from '../ai_info/data';
 import { Link, useNavigate } from 'react-router-dom';
 
 import NavBar from './NavBar';
+import Cookies from 'js-cookie';
+import { tempComplete, tempSave } from '../redux/slice/tempSlice';
 
 const ColaboAgreement = () => {
+  const dispatch = useDispatch();
   const navigator = useNavigate();
+
+  const temptask = useSelector((state) => state.temp.temptask);
   const location = useLocation(); // Recommend에서 전달된 데이터를 받음
   const { ai_data, ai_media, ai_lang, ai_image } = location.state || {}; // state가 없을 경우를 대비
-
-  const [formData, setFormData] = useState({
-    key: '',
-    company_name: '',
-    level: '',
-    master_name: '',
-    master_tel: '',
-    end_date: '',
-    sum_money: '',
-    ai_data: ai_data || '',
-    ai_media: ai_media || '',
-    ai_lang: ai_lang || '',
-    ai_image: ai_image || '',
-    title: '',
-    description: '',
-    status: '신규', //이 컴포넌트는 신규작성일 경우만 해당되므로 여기서 초기값을 정의해줌
-  });
-
-  const dispatch = useDispatch();
 
   const authData = useSelector((state) => state.auth.authData);
 
   useEffect(() => {
-    // Recommend에서 받은 값이 있으면 해당 값으로 드롭다운을 초기화
-    setFormData((prevData) => ({
-      ...prevData,
-      ai_data:
-        features.find(
-          (option) => option.Major === 'AI_Data' && option.title === ai_data
-        )?.title || '',
-      ai_media:
-        features.find(
-          (option) => option.Major === 'AI_Media' && option.title === ai_media
-        )?.title || '',
-      ai_lang:
-        features.find(
-          (option) => option.Major === 'AI_Lang' && option.title === ai_lang
-        )?.title || '',
-      ai_image:
-        features.find(
-          (option) => option.Major === 'AI_Image' && option.title === ai_image
-        )?.title || '',
-    }));
-  }, [ai_data, ai_media, ai_lang, ai_image]); // Recommend에서 전달된 값이 바뀔 때마다 실행
+    if (!authData) {
+      navigator('/');
+      return;
+    }
+  }, [authData]);
+
+  // useEffect(() => {
+  //   if (authData?.user_key === temptask?.key) {
+  //     const confirm = window.confirm(
+  //       '임시저장된 협의서가 있습니다. 불러오겠습니까?'
+  //     );
+  //     if (confirm) {
+  //       return;
+  //     } else {
+  //       dispatch(tempComplete());
+  //       formData = null;
+  //       navigator('/colabo');
+  //     }
+  //   }
+  // }, []);
+
+  const [formData, setFormData] = useState(
+    authData?.user_key === temptask?.key
+      ? {
+          key: temptask.key || '',
+          company_name: temptask.company_name || '',
+          level: temptask.level || '',
+          master_name: temptask.master_name || '',
+          master_tel: temptask.master_tel || '',
+          end_date: temptask.end_date || '',
+          sum_money: temptask.sum_money || '',
+          ai_data: ai_data || temptask.ai_data || '',
+          ai_media: ai_media || temptask.ai_media || '',
+          ai_lang: ai_lang || temptask.ai_lang || '',
+          ai_image: ai_image || temptask.ai_image || '',
+          title: temptask.title || '',
+          description: temptask.description || '',
+          status: '신규', //이 컴포넌트는 신규작성일 경우만 해당되므로 여기서 초기값을 정의해줌
+        }
+      : {
+          key: '',
+          company_name: '',
+          level: '',
+          master_name: '',
+          master_tel: '',
+          end_date: '',
+          sum_money: '',
+          ai_data: ai_data || '',
+          ai_media: ai_media || '',
+          ai_lang: ai_lang || '',
+          ai_image: ai_image || '',
+          title: '',
+          description: '',
+          status: '신규', //이 컴포넌트는 신규작성일 경우만 해당되므로 여기서 초기값을 정의해줌
+        }
+  );
 
   const handleChange = (e) => {
-    //const { name, value } = e.target;
     formData.key = authData.user_key;
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -97,11 +117,20 @@ const ColaboAgreement = () => {
 
     try {
       await dispatch(fetchPostTasksData(formData)).unwrap();
+      dispatch(tempComplete());
       navigator('/agreeFinsh');
     } catch (error) {
       console.error('Error adding task:', error);
       toast.error('협의서 등록 실패');
     }
+  };
+
+  const tempAgree = () => {
+    //dispatch(tempSave({ formData }));
+    Cookies.set('tempAgreeData', JSON.stringify(formData), { expires: 2 });
+    dispatch(tempSave(Cookies.get('tempAgreeData')));
+
+    toast.success('임시저장되었습니다.');
   };
 
   return (
@@ -113,7 +142,7 @@ const ColaboAgreement = () => {
             <h1>협의서 작성하기</h1>
             <h2>[AICO]나만의 AI솔루션 제작 요청</h2>
           </div>
-          <form className="" onSubmit={handleSubmit}>
+          <form className="">
             <div className="Agree-base">
               <h3>협의서 개요</h3>
               <div className="Agree-id ">
@@ -302,16 +331,23 @@ const ColaboAgreement = () => {
               </div>
             </div>
             <div className="Agree-buttonBox">
-              <button className="Agree-register" type="submit">
+              <button
+                className="Agree-register"
+                type="submit"
+                onClick={handleSubmit}
+              >
                 제출하기
               </button>
+              <button className="Agree-register" onClick={tempAgree}>
+                임시저장
+              </button>
+            </div>
               <div className="Agree-submit_tip">
                 제출 과정에서 문제가 발생하였다면 1577-2020으로 문의주세요!
                 <p>
                   협의서 관리 솔루션 그리팅(Greeting)의 고객센터로 연결됩니다.
                 </p>
               </div>
-            </div>
           </form>
         </div>
       </div>

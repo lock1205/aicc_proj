@@ -1,16 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../design/MainPage.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/slice/authSlice';
+import { tempComplete } from '../redux/slice/tempSlice';
 
 const NavBar = () => {
+  const temptask = useSelector((state) => state.temp.temptask);
   const authData = useSelector((state) => state.auth.authData);
-
+  const navigator = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logout());
+  };
+
+  const tempLoad = () => {
+    if (authData?.user_key === temptask?.key) {
+      const confirm = window.confirm(
+        '임시저장된 협의서가 있습니다. 불러오겠습니까?'
+      );
+      if (!confirm) {
+        dispatch(tempComplete());
+      }
+    }
+    navigator('/colabo');
   };
 
   return (
@@ -50,9 +64,7 @@ const NavBar = () => {
           </Link>
         )}
         {authData ? (
-          <Link className="main-agree" to={'/colabo'}>
-            <button>의뢰하기</button>
-          </Link>
+          <button onClick={tempLoad}>의뢰하기</button>
         ) : (
           <Link to={'/login'}>
             <button>의뢰하기</button>

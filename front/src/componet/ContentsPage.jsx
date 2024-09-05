@@ -1,9 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../design/MainPage.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { tempComplete } from '../redux/slice/tempSlice';
 
 const ContentsPage = () => {
+  const temptask = useSelector((state) => state.temp.temptask);
+  const dispatch = useDispatch();
+  const navigator = useNavigate();
+
+  const tempLoad = () => {
+    if (authData?.user_key === temptask?.key) {
+      const confirm = window.confirm(
+        '임시저장된 협의서가 있습니다. 불러오겠습니까?'
+      );
+      if (!confirm) {
+        dispatch(tempComplete());
+      }
+    }
+    navigator('/colabo');
+  };
   const authData = useSelector((state) => state.auth.authData);
   return (
     <div className="MP_category">
@@ -36,9 +52,7 @@ const ContentsPage = () => {
           <h1>AGREEMENT</h1>
           <h3>협의서를 작성하여 견적 및 상담 받아보세요. </h3>
           {authData ? (
-            <Link className="agree-link" to={'/colabo'}>
-              <button>CHECK</button>
-            </Link>
+            <button onClick={tempLoad}>CHECK</button>
           ) : (
             <Link className="agree-link" to={'/login'}>
               <button>CHECK</button>
