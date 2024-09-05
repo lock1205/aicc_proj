@@ -251,10 +251,10 @@ justify-content: center;
 .NAV .right button {
   background: none;
   border: none;
-  font-size: 16px;
   color: #060A1B;
   cursor: pointer;
   position: relative;
+  font-size: 17px;
 }
 
 .NAV .left button {
@@ -269,7 +269,7 @@ justify-content: center;
 
 /* 클릭 시 하단 커서 효과 */
 .NAV .left button::after,
-.NAV .right :nth-child(-n+2)::after {
+.NAV .right button::after {
   content: '';
   position: absolute;
   left: 0;
@@ -283,9 +283,13 @@ justify-content: center;
 }
 
 .NAV .left button:hover::after,
-.NAV .right :nth-child(1):hover::after {
+.NAV .right button:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+.NAV .right .main-agree button::after {
+  content: none;
 }
 
 .NAV .right .main-agree button {
@@ -306,29 +310,31 @@ justify-content: center;
   background: none;
   border: none;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); /*중앙에 위치*/
   display: flex;
-  align-items: center;
-  
+  margin-top: -15px;
 }
 
 .NAV .main-logo i,
 .NAV .main-logo span {
   pointer-events: auto;
   cursor: pointer;
-  
-  /* 로고 내부 텍스트와 아이콘은 클릭 가능 */
+  font-family: "Handjet", sans-serif;
 }
 
 .NAV .main-logo i {
-  font-size: 24px;
-  margin-right: 8px;
+  font-size: 28px;
+  margin-right: 7px;
+  margin-top: 1.5px;
 }
 
 .NAV .main-logo span {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bold;
-  color: #060A1B;
+}
+
+.NAV .main-logo:hover{
+  color: #7407FF;
 }
 
 /* 네비바 스크롤 시 투명도 적용 */
