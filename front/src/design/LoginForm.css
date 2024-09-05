@@ -76,9 +76,16 @@
   
 }
 
+
 .lg_left .loginButton:hover {
   background-color: #a669f5;
+  transition: background-color 1s ease;
 }
+
+.lg_left .loginButton:active {
+  background-color:#7407FF;
+}
+
 
 .lg_left .signup{
   display: flex;
