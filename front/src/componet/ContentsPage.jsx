@@ -10,7 +10,7 @@ const ContentsPage = () => {
       <div className="MP_contents">
         <div className="MP_contents_tech">
           <h1>TECHNOLOGY</h1>
-          <h3>AICO가 보유한 AI 기술 한 눈에 확인해보세요.</h3>
+          <h3>AICO가 보유한 다양한 AI 기술을 한 눈에 확인해보세요.</h3>
           <Link className="tech-link" to={'/techInfo'}>
             <button>CHECK</button>
           </Link>
@@ -34,7 +34,7 @@ const ContentsPage = () => {
 
         <div className="MP_contents_agree">
           <h1>AGREEMENT</h1>
-          <h3>협의서를 작성하여 견적 및 상담 받아보세요. </h3>
+          <h3>나만의 AI 솔루션 협의서를 작성하여 견적 및 상담 받아보세요. </h3>
           {authData ? (
             <Link className="agree-link" to={'/colabo'}>
               <button>CHECK</button>
