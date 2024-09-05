@@ -83,9 +83,6 @@ ALTER TABLE 테이블명 RENAME COLUMN 컬럼명 TO 변경할컬럼명; //컬럼
 ALTER TABLE 테이블명 RENAME COLUMN 컬럼명 TYPE 변경할데이터타입; //컬럼 데이터 타입 변경
 
 
---컬럼명 변경--
-ALTER TABLE TEST RENAME COLUMN tel TO address;
-
 --컬럼 타입 변경 ex)TEST address 컬럼의 데이터 타입변경--
 
 ALTER TABLE TEST ALTER COLUMN address TYPE varchar(120);
@@ -95,6 +92,12 @@ ALTER TABLE 테이블명 DROP COLUMN 컬럼명;
 
 
 INSERT INTO users(name, email, password) values('1234','할일1','할일1 설명','2021-08-01','lee')
+
+
+--컬럼 데이터 값 변경--
+UPDATE 테이블 이름
+SET 컬럼 이름 = '변경 값'
+WHERE 컬럼 이름 = 기존 값;
 
 
 --컬럼 DEFAULT 값 추가--
