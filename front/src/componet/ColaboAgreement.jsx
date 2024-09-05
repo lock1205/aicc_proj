@@ -342,12 +342,12 @@ const ColaboAgreement = () => {
                 임시저장
               </button>
             </div>
-              <div className="Agree-submit_tip">
-                제출 과정에서 문제가 발생하였다면 1577-2020으로 문의주세요!
-                <p>
-                  협의서 관리 솔루션 그리팅(Greeting)의 고객센터로 연결됩니다.
-                </p>
-              </div>
+            <div className="Agree-submit_tip">
+              제출 과정에서 문제가 발생하였다면 1577-2020으로 문의주세요!
+              <p>
+                협의서 관리 솔루션 그리팅(Greeting)의 고객센터로 연결됩니다.
+              </p>
+            </div>
           </form>
         </div>
       </div>

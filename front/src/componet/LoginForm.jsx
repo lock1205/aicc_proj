@@ -44,9 +44,9 @@ function LoginForm() {
           } else if (error.response.status === 404) {
             setModalMessage('등록된 ID를 찾을 수 없습니다.');
           } else {
-        setModalMessage(
-          '서버에서 오류가 발생했습니다. 나중에 다시 시도해주세요'
-        );
+            setModalMessage(
+              '서버에서 오류가 발생했습니다. 나중에 다시 시도해주세요'
+            );
           }
         } else {
           setModalMessage('알 수 없는 오류가 발생했습니다.');
