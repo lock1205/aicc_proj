@@ -44,12 +44,14 @@ html {
   border-radius: 15px;
   font-family: "Gowun Batang", serif;
 }
-.Main-text :nth-child(2) 
+.Main-text .Main-title
 {
   min-width: 600px;
+  width: 800px;
   text-align: center;
   padding: 35px;
-  font-family: "New Amsterdam", sans-serif;
+  /* font-family: "New Amsterdam", sans-serif; */
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
   font-weight:700 ;
   font-size: 100px;
   text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
@@ -61,12 +63,12 @@ html {
 .Main-text :nth-child(3) 
 {
   min-width: 713px ;
-  font-size: 20px;
+  font-size: 17px;
   margin-top: -10px;
   padding-left: 250px;
   padding-right: 250px;
   text-align: center;
-  font-family: "Gowun Batang", serif;
+  /* font-family: "Gowun Batang", serif; */
   color: #ffffff;
 }
 
@@ -148,71 +150,95 @@ html {
   z-index: 2;
 }
 
+/* 커서 닿기 전 */
 /* 영문 타이틀 스타일링 */
 .MP_contents h1 {
-  margin: 3;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+  margin-left: 57px;
+  margin-top: 250px;
   padding: 10px;
-  font-size: 32px;
-  color: #911d6a;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  font-size:42px;
+  color: rgba(236, 211, 245, 0.7);
+  transition: all 0.3s ease;
+}
+
+/* 설명 텍스트와 세부 설명 */
+.MP_contents h3,
+.MP_contents div > div {
+  opacity: 0; /* 기본적으로 숨김 */
+  transition: opacity 0.3s ease; 
+}
+
+/* 커서가 닿은 후 영문 타이틀 스타일링 */
+.MP_contents > div:hover h1 {
+  font-size: 40px; 
+  color: rgba(152, 101, 202, 0.8);
+  text-shadow: 2px 2px 5px rgba(251, 248, 255, 0.3);
+  margin-left: 82px;
+  margin-top: 30px;
+}
+
+/* 설명 텍스트와 세부 설명 커서가 닿으면 나타남 */
+.MP_contents > div:hover h3,
+.MP_contents > div:hover div {
+  opacity: 1; 
 }
 
 /* 설명 텍스트 스타일링 */
 .MP_contents h3 {
-  padding: 10px;
-  color: #cf45a1;
-  margin: 10px 0;
+  padding: 20px;
+  margin-left: 15px;
+  color: rgba(244, 253, 255, 0.8);
+  text-shadow: 2px 2px 5px rgba(49, 11, 100, 0.5);
   font-size: 20px;
-  position: absolute;
+  /* position: absolute; */
   top: 1px;
 }
 
 
-
-
 /* 세부 설명 텍스트 스타일링 */
 .MP_contents div>div {
-  padding-left:12px ;
-  margin-left: 10px;margin-right: 10px;
-  text-align: left;
+  margin-left:44px;
+  margin-top: 290px;
+  width: 80%;
   font-size: 16px;
-  color: #cf45a1;;
-  position: absolute;
+  color: rgba(244, 253, 255, 0.8);
+  text-shadow: 2px 2px 5px rgba(49, 11, 100, 0.9);
   bottom: 60px;
 }
 
 
-
 /* 버튼 스타일링 */
 .MP_contents button {
-  position: relative;
-  padding: 8px 30px;
+  position: absolute;
+  left: 15px;
+  top: 5%;
+  /* transform: translateY(-50%); */
+  width: 20%;
+  height: 15%;
   z-index: 2;
-  bottom: -5px;
-  left: 10px;
-  font-size: 1rem;
-  font-family: "Gowun Batang", serif;
+  font-size: 19px;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
   font-weight: 700;
-  background-color: rgb(145, 29, 106,0.5);
+  background-color: rgba(204, 138, 239, 0.8);
   color: white;
   border: none;
-  border-radius: 20px;
-  opacity: 0; /* 기본 상태에서 숨김 */
+  border-radius: 42% 58% 0% 100% / 37% 100% 0% 63%  ;
+  opacity: 0; 
   transform: scale(1);
   transition: opacity 0.3s ease, transform 0.3s ease;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 3px rgba(84, 1, 135, 0.7);
 }
 
-/* 콘텐츠에 커서가 닿았을 때 버튼 나타나기 */
+/* 커서가 닿았을 때 버튼 나타나기 */
 .MP_contents>div:hover button {
-  opacity: 1;
+  opacity: 1; 
 }
 
 .MP_contents button:hover {
   transform: scale(1.1);
+  background-color: rgb(188, 94, 239,0.7);
 }
-
-
 
 
 
@@ -251,10 +277,10 @@ justify-content: center;
 .NAV .right button {
   background: none;
   border: none;
-  font-size: 16px;
   color: #060A1B;
   cursor: pointer;
   position: relative;
+  font-size: 17px;
 }
 
 .NAV .left button {
@@ -269,7 +295,7 @@ justify-content: center;
 
 /* 클릭 시 하단 커서 효과 */
 .NAV .left button::after,
-.NAV .right :nth-child(-n+2)::after {
+.NAV .right button::after {
   content: '';
   position: absolute;
   left: 0;
@@ -283,9 +309,13 @@ justify-content: center;
 }
 
 .NAV .left button:hover::after,
-.NAV .right :nth-child(1):hover::after {
+.NAV .right button:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+.NAV .right .main-agree button::after {
+  content: none;
 }
 
 .NAV .right .main-agree button {
@@ -306,29 +336,31 @@ justify-content: center;
   background: none;
   border: none;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); /*중앙에 위치*/
   display: flex;
-  align-items: center;
-  
+  margin-top: -15px;
 }
 
 .NAV .main-logo i,
 .NAV .main-logo span {
   pointer-events: auto;
   cursor: pointer;
-  
-  /* 로고 내부 텍스트와 아이콘은 클릭 가능 */
+  font-family: "Handjet", sans-serif;
 }
 
 .NAV .main-logo i {
-  font-size: 24px;
-  margin-right: 8px;
+  font-size: 28px;
+  margin-right: 7px;
+  margin-top: 1.5px;
 }
 
 .NAV .main-logo span {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bold;
-  color: #060A1B;
+}
+
+.NAV .main-logo:hover{
+  color: #7407FF;
 }
 
 /* 네비바 스크롤 시 투명도 적용 */

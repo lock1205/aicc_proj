@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import NavBar from './NavBar';
 import '../design/Recommend.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Recommend = () => {
+  const authData = useSelector((state) => state.auth.authData);
+
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
@@ -53,10 +56,19 @@ const Recommend = () => {
               <span>#{category.ai_image}</span>
             </div>
             <div className="R-des">{category.package_desc}</div>
+
             <div className="R-like">
-              <button onClick={() => handleNavigate(category)}>
-                나만의 솔루션 의뢰하기
-              </button>
+              {authData ? (
+                <button onClick={() => handleNavigate(category)}>
+                  나만의 솔루션 의뢰하기
+                </button>
+              ) : (
+                <Link to={'/login'}>
+                  <button onClick={() => handleNavigate(category)}>
+                    나만의 솔루션 의뢰하기
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
         ))}

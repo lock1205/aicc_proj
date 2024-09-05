@@ -16,7 +16,7 @@ const MainPage = () => {
       </div>
       <div className="Main-text">
         <div>WELCOME TO AICO</div>
-        <div>Create Your Own AI Solution</div>
+        <div className="Main-title">Create Your Own AI Solution</div>
         <div>
           {text3}
           <br />
