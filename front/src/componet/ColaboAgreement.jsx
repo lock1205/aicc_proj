@@ -25,7 +25,7 @@ const ColaboAgreement = () => {
     ai_image: '',
     title: '',
     description: '',
-    status: '신규', //현재 협의서 상태를 리덕스 case문으로 넣는다
+    status: '신규', //이 컴포넌트는 신규작성일 경우만 해당되므로 여기서 초기값을 정의해줌
   });
 
   const dispatch = useDispatch();

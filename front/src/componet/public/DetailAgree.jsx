@@ -110,7 +110,7 @@ const DetailAgree = () => {
     try {
       await dispatch(fetchUpdateStatusTasksData(status)).unwrap();
       if (status.status === '완료') toast.success('사업이 완료되었습니다.');
-      else toast.success('사업을 진행되었습니다.');
+      else toast.success('사업을 진행합니다..');
 
       onClose();
     } catch (error) {

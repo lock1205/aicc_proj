@@ -27,4 +27,4 @@ const authSlice = createSlice({
 }); // slice 생성
 
 export const { login, logout } = authSlice.actions;
-export default authSlice.reducer; // 4. export 된 함수들을 sto
+export default authSlice.reducer; // 4. export 된 함수들을 store에 올림
