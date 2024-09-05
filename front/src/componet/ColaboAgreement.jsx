@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -10,6 +11,8 @@ import NavBar from './NavBar';
 
 const ColaboAgreement = () => {
   const navigator = useNavigate();
+  const location = useLocation(); // Recommend에서 전달된 데이터를 받음
+  const { ai_data, ai_media, ai_lang, ai_image } = location.state || {}; // state가 없을 경우를 대비
 
   const [formData, setFormData] = useState({
     key: '',
@@ -19,10 +22,10 @@ const ColaboAgreement = () => {
     master_tel: '',
     end_date: '',
     sum_money: '',
-    ai_data: '',
-    ai_media: '',
-    ai_lang: '',
-    ai_image: '',
+    ai_data: ai_data || '',
+    ai_media: ai_media || '',
+    ai_lang: ai_lang || '',
+    ai_image: ai_image || '',
     title: '',
     description: '',
     status: '신규', //현재 협의서 상태를 리덕스 case문으로 넣는다
@@ -31,6 +34,29 @@ const ColaboAgreement = () => {
   const dispatch = useDispatch();
 
   const authData = useSelector((state) => state.auth.authData);
+
+  useEffect(() => {
+    // Recommend에서 받은 값이 있으면 해당 값으로 드롭다운을 초기화
+    setFormData((prevData) => ({
+      ...prevData,
+      ai_data:
+        features.find(
+          (option) => option.Major === 'AI_Data' && option.title === ai_data
+        )?.title || '',
+      ai_media:
+        features.find(
+          (option) => option.Major === 'AI_Media' && option.title === ai_media
+        )?.title || '',
+      ai_lang:
+        features.find(
+          (option) => option.Major === 'AI_Lang' && option.title === ai_lang
+        )?.title || '',
+      ai_image:
+        features.find(
+          (option) => option.Major === 'AI_Image' && option.title === ai_image
+        )?.title || '',
+    }));
+  }, [ai_data, ai_media, ai_lang, ai_image]); // Recommend에서 전달된 값이 바뀔 때마다 실행
 
   const handleChange = (e) => {
     //const { name, value } = e.target;
@@ -208,7 +234,12 @@ const ColaboAgreement = () => {
               <h3>희망 기술</h3>
               <div className="Agree-ai_data">
                 <p>AI데이터기술</p>
-                <select name="ai_data" class="select" onChange={handleChange}>
+                <select
+                  name="ai_data"
+                  class="select"
+                  onChange={handleChange}
+                  value={formData.ai_data}
+                >
                   <option key={''}>선택하세요</option>
                   {features.map(
                     (option, idx) =>
@@ -220,7 +251,12 @@ const ColaboAgreement = () => {
               </div>
               <div className="Agree-ai_media">
                 <p>AI미디어기술</p>
-                <select name="ai_media" class="select" onChange={handleChange}>
+                <select
+                  name="ai_media"
+                  class="select"
+                  onChange={handleChange}
+                  value={formData.ai_media}
+                >
                   <option key={''}>선택하세요</option>
                   {features.map(
                     (option, idx) =>
@@ -232,7 +268,12 @@ const ColaboAgreement = () => {
               </div>
               <div className="Agree-ai_image">
                 <p>AI이미지기술</p>
-                <select name="ai_image" class="select" onChange={handleChange}>
+                <select
+                  name="ai_image"
+                  class="select"
+                  onChange={handleChange}
+                  value={formData.ai_image}
+                >
                   <option key={''}>선택하세요</option>
                   {features.map(
                     (option, idx) =>
@@ -244,7 +285,12 @@ const ColaboAgreement = () => {
               </div>
               <div className="Agree-ai_lang">
                 <p>AI생성을 위한 프로그래밍 언어</p>
-                <select name="ai_lang" class="select" onChange={handleChange}>
+                <select
+                  name="ai_lang"
+                  class="select"
+                  onChange={handleChange}
+                  value={formData.ai_lang}
+                >
                   <option key={''}>선택하세요</option>
                   {features.map(
                     (option, idx) =>

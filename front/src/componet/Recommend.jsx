@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from './NavBar';
 import '../design/Recommend.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Recommend = () => {
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
   // 데이터를 가져오는 비동기 함수
   const fetchCategories = async () => {
@@ -25,6 +26,18 @@ const Recommend = () => {
     fetchCategories();
   }, []); // 의존성 배열을 빈 배열로 설정하여 무한 루프 방지
 
+  // useNavigate 데이터 전달
+  const handleNavigate = (category) => {
+    navigate('/colabo', {
+      state: {
+        ai_data: category.ai_data,
+        ai_media: category.ai_media,
+        ai_lang: category.ai_lang,
+        ai_image: category.ai_image,
+      },
+    });
+  };
+
   return (
     <div className="bg">
       <NavBar />
@@ -41,9 +54,9 @@ const Recommend = () => {
             </div>
             <div className="R-des">{category.package_desc}</div>
             <div className="R-like">
-              <Link to="/colabo">
-                <button>나만의 솔루션 의뢰하기</button>
-              </Link>
+              <button onClick={() => handleNavigate(category)}>
+                나만의 솔루션 의뢰하기
+              </button>
             </div>
           </div>
         ))}
